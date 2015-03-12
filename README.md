@@ -1,6 +1,40 @@
 # EvoGen_course
 Material for Evolutionary Genomics course - data analysis module
 
+Date/time: ?am–?pm 13th-17th April 2015
+
+Location: TBC
+
+
+## Agenda
+
+### Day 1
+
+ - Lecture: raw data, file formats, genotype likelihoods, genotype calling
+
+ - Journal discussion:
+
+ - Practical exercises: 
+data filtering (basic filtering options on reads and sites, mostly from aligned sequencing data), genotype calling.
+
+## Day 2
+
+ - Lecture: SNP calling and advanced methods for low-quality data
+
+ - Journal discussion:
+
+ - Practical exercises: SNP calling, estimation of quantities of interest in evolutionary genetics from low-quality data
+
+Suggested reading before the workshop is Nielsen et al. Nature Reviews Genetics 2011, available for free [here](http://cteg.berkeley.edu/~nielsen/wordpress/wp-content/uploads/2013/01/Nielsen-R.-et-al.-2011.pdf).
+
+## Day 3
+
+ - Lecture: Population structure and effect of demography on genetic diversity
+
+ - Journal discussion:
+
+ - Practical exercises: PCA/MDS, 
+
 ## Requirements
 
 Please note that this tutorial has been designed and tested on unix and mac.
