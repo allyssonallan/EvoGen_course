@@ -17,7 +17,7 @@ Location: TBC
  - Practical exercises: 
 data filtering (basic filtering options on reads and sites, mostly from aligned sequencing data), genotype calling.
 
-## Day 2
+### Day 2
 
  - Lecture: SNP calling and advanced methods for low-quality data
 
@@ -27,13 +27,22 @@ data filtering (basic filtering options on reads and sites, mostly from aligned 
 
 Suggested reading before the workshop is Nielsen et al. Nature Reviews Genetics 2011, available for free [here](http://cteg.berkeley.edu/~nielsen/wordpress/wp-content/uploads/2013/01/Nielsen-R.-et-al.-2011.pdf).
 
-## Day 3
+### Day 3
 
  - Lecture: Population structure and effect of demography on genetic diversity
 
  - Journal discussion:
 
- - Practical exercises: PCA/MDS, 
+ - Practical exercises: PCA/MDS, ABC/dadi
+
+### Day 4
+
+ - Lecture: Natural selection
+
+ - Journal discussion:
+
+ - Practical exercises: scan FST/PBS, nSL/iHS H1...
+
 
 ## Requirements
 
