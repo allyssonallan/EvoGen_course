@@ -44,6 +44,8 @@ Let`s have a look at an example:
 
 Lines are:
 
+order | value
+----- | -----
 first | sequence identified
 second | raw sequence
 third | additional description
@@ -54,13 +56,47 @@ Usually, these files have file extension .fq or .fastq.
 
 Quality values are ordered ASCII characters
 
-  `!"#$%&()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_'abcdefghijklmnopqrstuvwxyz{|}~`
+  `!""#$%&()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_''abcdefghijklmnopqrstuvwxyz{|}~`
 
 Therefore, you can see that the highest quality is in the middle of the read.
 
 -----------------
 
+FastQ files are useful to retrieve some basic statistics on the quality of your data.
+There are several reasons why you may have low quality reads, like bad quality of DNA template, problems with reagents, and adapter contamination.
 
+With the program **FastQC**, we can quickly inspect:
+
+Statistic | Description
+--------- | -----------
+per base sequence quality | overview of the range of quality values across <br>
+ | all bases at each position (quality usually degrades during the run, thus towards the end of the read);<br>
+per sequence quality scores | check whether a subset of sequences have <br>
+ | global low quality scores;<br>
+per base sequence content | check whether there is difference in base compositions <br>
+ | along the read (e.g. due to contamination or degradation);<br>
+per base GC content | (see above);<br>
+per sequence GC content | the expectation should be a Normal distribution;<br>
+per base N content | check the amount of not-called bases;<br>
+sequence length distribution | check lengths of reads;<br>
+duplicate sequences | high levels of (exact) duplication may suggest enrichment bias;<br>
+over-represented sequences | over-representation may indicate contamination;<br>
+over-represented K-mers | check the relative enrichment along the read.
+<br>
+
+Open a .fq file in the folder `input/chimpmunk/` with FastQC (for instance `IND02_R1.fq`).
+Inspect the statistics, especially *per base sequence quality* and *sequence duplication levels*.
+Do we need to filter out some reads?
+
+As an example, [here](http://palin.popgen.dk/mfumagalli/Workshop/ANU/web/IND02_R1.fq_fastqc.zip) you can find the zipped summary report for `IND02_R1.fq`.
+
+Here we can see some of these QC plots: 
+
+- [per base quality](http://palin.popgen.dk/mfumagalli/Workshop/ANU/web/per_base_quality.pdf][per base quality)
+
+- [per sequence quality](http://palin.popgen.dk/mfumagalli/Workshop/ANU/web/per_sequence_quality.pdf][per sequence quality)
+
+-------------------
 
 
 
