@@ -668,23 +668,18 @@ Parameter | Value | Description
 -G | output/lyca.mpileup | mpileup file <br> 
 -P | input/lyca/clst.txt | this gives the correspondence sample-pop for HWE filtering <br>
 -p | output/lyca.bad.bz2 | list of filtered sites <br>
-<br>
 -d | 50 | minimum site depth <br>
 -D | 900 | maximu site depth <br>
 -k,-u | 10,2 | at least 10 samples must have 2 reads <br>
 -a | 0 | minimum number of alternate alleles per site <br>
-<br>
 -Q | 20 | minimum RMS mapping quality for SNPs <br>
 -f | 0.001 | min p-value for map quality bias <br>
 -S | 0.001 | min p-value for strand bias from combining p-values across individuals <br>
 -T | 0.001 | min p-value for allele bias in potential heterozygotes <br>
 -b | 0.001 | min p-value for base quality bias <br>
 -e | 0.001 | min p-value for biased distance of alternate bases from ends of reads <br>
-<br>
 -h | 0.001 | min p-value for exact test of HWE <br>
-<br>
 -v | process nonvariant sites <br>
-<br>
 
 Let us write down the command:
 ```
