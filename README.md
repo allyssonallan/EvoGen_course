@@ -27,9 +27,9 @@ Instructions to download all material necessary for the practical sessions are g
 
  - Journal discussion:
 
- - Practical session: [genotype calling](https://github.com/mfumagalli/EvoGen_course/blob/master/genocall.md), advanced methods to estimate [SFS]((https://github.com/mfumagalli/EvoGen_course/blob/master/sfs.md) and [summary statistics](https://github.com/mfumagalli/ngsTools/blob/master/TUTORIAL.md)
+ - Practical session: [genotype calling](https://github.com/mfumagalli/EvoGen_course/blob/master/genocall.md), advanced methods to estimate [SFS]((https://github.com/mfumagalli/EvoGen_course/blob/master/sfs.md)
 
- - Additional material: genotype calling using ([SAMtools](https://github.com/mfumagalli/EvoGen_course/blob/master/genocall_samtools.md)) and ([BEAGLE](https://github.com/mfumagalli/EvoGen_course/blob/master/imputation.md)), estimation of [inbreeding](https://github.com/mfumagalli/EvoGen_course/blob/master/inbreeding.md) coefficients, advanced methods to calculate summary statistics using [ANGSD](https://github.com/mfumagalli/EvoGen_course/blob/master/lowcov.md).
+ - Additional material: genotype calling using ([SAMtools](https://github.com/mfumagalli/EvoGen_course/blob/master/genocall_samtools.md)) and ([BEAGLE](https://github.com/mfumagalli/EvoGen_course/blob/master/imputation.md)), estimation of [inbreeding](https://github.com/mfumagalli/EvoGen_course/blob/master/inbreeding.md) coefficients, advanced methods to calculate summary statistics using [ANGSD](https://github.com/mfumagalli/EvoGen_course/blob/master/lowcov.md) and [ngsTools](https://github.com/mfumagalli/EvoGen_course/blob/master/lowcov_ngstools.md) ([official tutorial]((https://github.com/mfumagalli/ngsTools/blob/master/TUTORIAL.md))
 
 Suggested reading before the workshop is Nielsen et al. Nature Reviews Genetics 2011, available [here](http://cteg.berkeley.edu/~nielsen/wordpress/wp-content/uploads/2013/01/Nielsen-R.-et-al.-2011.pdf).
 

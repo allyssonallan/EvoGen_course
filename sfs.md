@@ -133,8 +133,9 @@ A possible **SOLUTION** for this exercise can be found [here](https://github.com
 Alternatively, estimate the SFS on your dataset or on the example human dataset.
 
 
-
-
+**ADDITIONAL MATERIAL**
+In case of low-depth sequencing data, summary statistics can be computed by keeping statistical uncertainty into account.
+We provide some examples on how to compute summary statistics from low-depth sequencing data using [ANGSD](https://github.com/mfumagalli/EvoGen_course/blob/master/lowcov.md) and [ngsTools](https://github.com/mfumagalli/ngsTools/blob/master/TUTORIAL.md).
 
 
 
