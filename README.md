@@ -19,9 +19,9 @@ Instructions to download all material necessary for the practical sessions are g
 
  *	Practical session:
  
-	[data filtering](https://github.com/mfumagalli/EvoGen_course/blob/master/filtering.md)
+	+	[data filtering](https://github.com/mfumagalli/EvoGen_course/blob/master/filtering.md)
 
-	[SNP calling](https://github.com/mfumagalli/EvoGen_course/blob/master/snpcall.md)
+	+	[SNP calling](https://github.com/mfumagalli/EvoGen_course/blob/master/snpcall.md)
 
  *	Additional material: SNP calling using [SAMtools](https://github.com/mfumagalli/EvoGen_course/blob/master/snpcall_samtools.md).
 
