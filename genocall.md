@@ -16,7 +16,7 @@ for i in input/human/smallNA*.bam; do samtools-0.1.19/samtools index $i; done
 ./samtools-0.1.19/samtools faidx input/human/hg19_chr1.fa.gz
 ```
 
-*** ANGSD
+### ANGSD
 
 First, we will see how to use ANGSD to call genotypes.
 The specific option is `-doGeno`:
@@ -124,6 +124,13 @@ Indeed, the mean depth per sample is around 4, therefore genotypes cannot be ass
 Setting this threshold depends on the mean sequencing depth of your data, as well as your application. 
 For some analyses you need to work only with high quality genotypes (e.g. measure of proportion of shared SNPs for gene flow estimate), while for others you can be more relaxed (e.g. estimate of overall nucleotide diversity). 
 We will show later how to accurately estimate summary statistics with low-depth data.
+
+
+### Inbred species
+
+**ADDITIONAL MATERIAL**
+For some studies (domesticated or self-pollinated species), it is important to consider any deviation from HWE when performing genotype or SNP calling.
+We provide some command lines ([here](https://github.com/mfumagalli/EvoGen_course/blob/master/inbreeding.md)) to achieve this using ngsTools.
 
 
 ### SAMtools

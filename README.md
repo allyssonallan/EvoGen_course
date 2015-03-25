@@ -50,6 +50,16 @@ Suggested reading before the workshop is Nielsen et al. Nature Reviews Genetics 
  - Practical exercises: scan FST/PBS, nSL/iHS H1...
 
 
+## Credits
+
+Some materials have been borrowed (and then adapted) from Thorfinn Korneliussen, Tyler Linderoth, Filipe G. Vieira.
+Sequencing data on butterfiles has been kindly provided by Zach Gompert.<br>
+ANGSD has been developed by Thorfinn Korneliussen and Anders Albrechtsen. 
+Filipe G. Vieira implemented the inbreeding estimation. 
+Tyler Linderoth wrote most of data filtering scripts together with Sonal Singhai, Ke Bi, and Filipe G. Vieira.
+
+
+
 
 
 
