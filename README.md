@@ -10,11 +10,11 @@ Location: TBC
 
 ### Day 1
 
- - Lecture: From raw data to SNPs [pdf](https://github.com/mfumagalli/EvoGen_course/slides_day_1.pdf).
+ - Lecture: From raw data to SNPs ([pdf](https://github.com/mfumagalli/EvoGen_course/blob/master/slides_day_1.pdf)).
 
  - Journal discussion:
 
- - Practical session: [data filtering](https://github.com/mfumagalli/EvoGen_course/filtering.md), [SNP calling](https://github.com/mfumagalli/EvoGen_course/snpcall.md).
+ - Practical session: [data filtering](https://github.com/mfumagalli/EvoGen_course/blob/master/filtering.md), [SNP calling](https://github.com/mfumagalli/EvoGen_course/blob/master/snpcall.md).
 
  - Additional material: 
 
@@ -26,7 +26,7 @@ Location: TBC
 
  - Practical exercises: SNP calling, estimation of quantities of interest in evolutionary genetics from low-quality data
 
-Suggested reading before the workshop is Nielsen et al. Nature Reviews Genetics 2011, available for free [here](http://cteg.berkeley.edu/~nielsen/wordpress/wp-content/uploads/2013/01/Nielsen-R.-et-al.-2011.pdf).
+Suggested reading before the workshop is Nielsen et al. Nature Reviews Genetics 2011, available [here](http://cteg.berkeley.edu/~nielsen/wordpress/wp-content/uploads/2013/01/Nielsen-R.-et-al.-2011.pdf).
 
 ### Day 3
 
