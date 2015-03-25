@@ -10,12 +10,13 @@ Location: TBC
 
 ### Day 1
 
- - Lecture: raw data, file formats, genotype likelihoods, genotype calling
+ - Lecture: From raw data to SNPs [pdf](https://github.com/mfumagalli/EvoGen_course/slides_day_1.pdf).
 
  - Journal discussion:
 
- - Practical exercises: 
-data filtering (basic filtering options on reads and sites, mostly from aligned sequencing data), genotype calling.
+ - Practical session: [data filtering](https://github.com/mfumagalli/EvoGen_course/filtering.md), [SNP calling](https://github.com/mfumagalli/EvoGen_course/snpcall.md).
+
+ - Additional material: 
 
 ### Day 2
 
