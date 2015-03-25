@@ -19,7 +19,7 @@ Instructions to download all material necessary for the practical sessions are g
 
  - Practical session: [data filtering](https://github.com/mfumagalli/EvoGen_course/blob/master/filtering.md), [SNP calling](https://github.com/mfumagalli/EvoGen_course/blob/master/snpcall.md).
 
- - Additional material: [SNP calling (SAMtools))](https://github.com/mfumagalli/EvoGen_course/blob/master/snpcall_samtools.md).
+ - Additional material: SNP calling using [SAMtools](https://github.com/mfumagalli/EvoGen_course/blob/master/snpcall_samtools.md).
 
 ### Day 2
 
@@ -28,6 +28,8 @@ Instructions to download all material necessary for the practical sessions are g
  - Journal discussion:
 
  - Practical session: genotype calling, estimation of quantities of interest in evolutionary genetics from low-quality data
+
+ - Additional material: genotype calling using ([SAMtools](https://github.com/mfumagalli/EvoGen_course/blob/master/genocall_samtools.md)) and ([BEAGLE](https://github.com/mfumagalli/EvoGen_course/blob/master/imputation.md))
 
 Suggested reading before the workshop is Nielsen et al. Nature Reviews Genetics 2011, available [here](http://cteg.berkeley.edu/~nielsen/wordpress/wp-content/uploads/2013/01/Nielsen-R.-et-al.-2011.pdf).
 
