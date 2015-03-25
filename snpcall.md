@@ -199,13 +199,11 @@ However, various cutoffs and a dedicated filtering should be perform to assess r
 Estimate allele frequencies and call SNPs using the example dataset (or your own) using ANGSD.
 Try varying the cutoff for SNP calling and record how many sites are predicted to be variable for each scenario.
 Identify which sites are not predicted to be variable anymore with a more stringent cutoff (e.g. between a pair of scenario), and plot their allele frequencies.
-A possible **SOLUTION** for this exercise is given [here](https://github.com/mfumagalli/EvoGen_course/solutions.txt).
-
-
+A possible **SOLUTION** for this exercise is given [here](https://github.com/mfumagalli/EvoGen_course/blob/master/solutions.txt).
 
 **ADDITIONAL MATERIAL**
-Command lines for SNP calling using SAMtools, and comparison with ANGSD, can be found in the Additional Material section at the bottom.
-</verse>
+Command lines for SNP calling using SAMtools, and comparison with ANGSD, are given [here](https://github.com/mfumagalli/EvoGen_course/blob/master/snpcall_samtools.txt).
+
 
 
 
