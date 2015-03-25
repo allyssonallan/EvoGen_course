@@ -13,15 +13,17 @@ Instructions to download all material necessary for the practical sessions are g
 
 ### Day 1
 
- - Lecture: From raw data to SNPs ([pdf](https://github.com/mfumagalli/EvoGen_course/blob/master/slides_day_1.pdf)).
+ * Lecture: From raw data to SNPs ([pdf](https://github.com/mfumagalli/EvoGen_course/blob/master/slides_day_1.pdf)).
 
- - Journal discussion:
+ * Journal discussion:
 
- - Practical session: 
- -- [data filtering](https://github.com/mfumagalli/EvoGen_course/blob/master/filtering.md)
- -- [SNP calling](https://github.com/mfumagalli/EvoGen_course/blob/master/snpcall.md)
+ *	Practical session:
+ 
+	[data filtering](https://github.com/mfumagalli/EvoGen_course/blob/master/filtering.md)
 
- - Additional material: SNP calling using [SAMtools](https://github.com/mfumagalli/EvoGen_course/blob/master/snpcall_samtools.md).
+	[SNP calling](https://github.com/mfumagalli/EvoGen_course/blob/master/snpcall.md)
+
+ * Additional material: SNP calling using [SAMtools](https://github.com/mfumagalli/EvoGen_course/blob/master/snpcall_samtools.md).
 
 ### Day 2
 
