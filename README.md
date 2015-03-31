@@ -62,7 +62,7 @@ Suggested reading before the workshop is Nielsen et al. Nature Reviews Genetics 
 
 ### Day 3
 
- *	Lecture: Population structure and effect of demography on genetic diversity
+ *	Lecture: Population structure and demographic inferences ([pdf](https://github.com/mfumagalli/EvoGen_course/blob/master/slides_day_3.pdf)).
 
  *	Journal discussion:
 
@@ -70,7 +70,7 @@ Suggested reading before the workshop is Nielsen et al. Nature Reviews Genetics 
 
 ### Day 4
 
- *	Lecture: Natural selection
+ *	Lecture: Detecting natural selection ([pdf](https://github.com/mfumagalli/EvoGen_course/blob/master/slides_day_4.pdf))
 
  *	Journal discussion:
 
