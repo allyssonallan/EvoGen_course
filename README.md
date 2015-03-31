@@ -23,7 +23,9 @@ Instructions to download all material necessary for the practical sessions are g
 
 	+	[SNP calling](https://github.com/mfumagalli/EvoGen_course/blob/master/snpcall.md)
 
- *	Additional material: SNP calling using [SAMtools](https://github.com/mfumagalli/EvoGen_course/blob/master/snpcall_samtools.md).
+ *	Additional material:
+
+	+	SNP calling using [SAMtools](https://github.com/mfumagalli/EvoGen_course/blob/master/snpcall_samtools.md).
 
 ### Day 2
 
@@ -41,9 +43,9 @@ Instructions to download all material necessary for the practical sessions are g
 
 	+	genotype calling using:
 
-		-	([SAMtools](https://github.com/mfumagalli/EvoGen_course/blob/master/genocall_samtools.md))
+		-	[SAMtools](https://github.com/mfumagalli/EvoGen_course/blob/master/genocall_samtools.md)
 
-		-	([BEAGLE](https://github.com/mfumagalli/EvoGen_course/blob/master/imputation.md))
+		-	[BEAGLE](https://github.com/mfumagalli/EvoGen_course/blob/master/imputation.md)
 
 	+	estimation of [inbreeding](https://github.com/mfumagalli/EvoGen_course/blob/master/inbreeding.md) coefficients
 
