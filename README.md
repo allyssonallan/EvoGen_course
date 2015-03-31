@@ -57,8 +57,8 @@ Instructions to download all material necessary for the practical sessions are g
 
  *	Practical exercises:
 
-	+	estimating demographic parameters through simulations
-	+	inference of genetic structure/tree
+	+	estimating demographic parameters through simulations ([R script](https://github.com/mfumagalli/EvoGen_course/blob/master/practise_day_3.R))
+	+	inference of population splits and mixture events using TreeMix ([bash script](https://github.com/mfumagalli/EvoGen_course/blob/master/practise_day_3_extra.txt))
 
 ### Day 4
 
@@ -68,7 +68,7 @@ Instructions to download all material necessary for the practical sessions are g
 
  *	Practical exercises:
 
-	+	selection scan in the human genome and assessment of significance
+	+	selection scan in the human genome and assessment of significance ([R script](https://github.com/mfumagalli/EvoGen_course/blob/master/practise_day_4.R))
 	+	summary statistics using [ngsTools/ngsDist](https://github.com/mfumagalli/ngsTools/blob/master/TUTORIAL.md)
 
 	
