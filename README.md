@@ -24,8 +24,8 @@ Instructions to download all material necessary for the practical sessions are g
  *	Additional material:
 
 	+       genotype calling using:
-	-	[SAMtools](https://github.com/mfumagalli/EvoGen_course/blob/master/genocall_samtools.md)
-	-	[BEAGLE](https://github.com/mfumagalli/EvoGen_course/blob/master/imputation.md)
+		-	[SAMtools](https://github.com/mfumagalli/EvoGen_course/blob/master/genocall_samtools.md)
+		-	[BEAGLE](https://github.com/mfumagalli/EvoGen_course/blob/master/imputation.md)
 
 ### Day 2
 
