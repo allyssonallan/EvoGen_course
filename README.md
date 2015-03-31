@@ -15,20 +15,17 @@ Instructions to download all material necessary for the practical sessions are g
 
  *	Lecture: From raw NGS data to genotypes ([pdf](https://github.com/mfumagalli/EvoGen_course/blob/master/slides_day_1.pdf))
 
- *	Paper discussion: slides ([pdf](https://github.com/mfumagalli/EvoGen_course/blob/master/slides_day_1_paper.pdf)) and paper ([pdf](http://cteg.berkeley.edu/~nielsen/wordpress/wp-content/uploads/2013/01/Nielsen-R.-et-al.-2011.pdf)
+ *	Paper discussion: slides ([pdf](https://github.com/mfumagalli/EvoGen_course/blob/master/slides_day_1_paper.pdf)) and paper ([pdf](http://cteg.berkeley.edu/~nielsen/wordpress/wp-content/uploads/2013/01/Nielsen-R.-et-al.-2011.pdf))
 
  *	Practical session:
  
 	+	[data filtering](https://github.com/mfumagalli/EvoGen_course/blob/master/filtering.md)
-
 	+       [genotype calling](https://github.com/mfumagalli/EvoGen_course/blob/master/genocall.md)
 
  *	Additional material:
 
 	+       genotype calling using:
-
                 -       [SAMtools](https://github.com/mfumagalli/EvoGen_course/blob/master/genocall_samtools.md)
-
                 -       [BEAGLE](https://github.com/mfumagalli/EvoGen_course/blob/master/imputation.md)
 
 ### Day 2
@@ -40,21 +37,16 @@ Instructions to download all material necessary for the practical sessions are g
  *	Practical session: 
 
 	+       [SNP calling](https://github.com/mfumagalli/EvoGen_course/blob/master/snpcall.md)
-
 	+	advanced methods to estimate [SFS](https://github.com/mfumagalli/EvoGen_course/blob/master/sfs.md)
 
  *	Additional material: 
 
 	+       SNP calling using [SAMtools](https://github.com/mfumagalli/EvoGen_course/blob/master/snpcall_samtools.md)
-
 	+	estimation of [inbreeding](https://github.com/mfumagalli/EvoGen_course/blob/master/inbreeding.md) coefficients
-
 	+	advanced methods to calculate summary statistics using:
 
 		-	[ANGSD](https://github.com/mfumagalli/EvoGen_course/blob/master/lowcov.md)
-
 		-	[ngsTools](https://github.com/mfumagalli/EvoGen_course/blob/master/lowcov_ngstools.md)
-
 		-	[ngsTools/ngsDist](https://github.com/mfumagalli/ngsTools/blob/master/TUTORIAL.md)
 
 
