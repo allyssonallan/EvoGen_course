@@ -17,16 +17,15 @@ Instructions to download all material necessary for the practical sessions are g
 
  *	Paper discussion: slides ([pdf](https://github.com/mfumagalli/EvoGen_course/blob/master/slides_day_1_paper.pdf)) and paper ([pdf](http://cteg.berkeley.edu/~nielsen/wordpress/wp-content/uploads/2013/01/Nielsen-R.-et-al.-2011.pdf))
 
- *	Practical session:
- 
+ *	Practical session: 
 	+	[data filtering](https://github.com/mfumagalli/EvoGen_course/blob/master/filtering.md)
 	+       [genotype calling](https://github.com/mfumagalli/EvoGen_course/blob/master/genocall.md)
 
  *	Additional material:
 
 	+       genotype calling using:
-                -       [SAMtools](https://github.com/mfumagalli/EvoGen_course/blob/master/genocall_samtools.md)
-                -       [BEAGLE](https://github.com/mfumagalli/EvoGen_course/blob/master/imputation.md)
+	-	[SAMtools](https://github.com/mfumagalli/EvoGen_course/blob/master/genocall_samtools.md)
+	-	[BEAGLE](https://github.com/mfumagalli/EvoGen_course/blob/master/imputation.md)
 
 ### Day 2
 
@@ -44,7 +43,6 @@ Instructions to download all material necessary for the practical sessions are g
 	+       SNP calling using [SAMtools](https://github.com/mfumagalli/EvoGen_course/blob/master/snpcall_samtools.md)
 	+	estimation of [inbreeding](https://github.com/mfumagalli/EvoGen_course/blob/master/inbreeding.md) coefficients
 	+	advanced methods to calculate summary statistics using:
-
 		-	[ANGSD](https://github.com/mfumagalli/EvoGen_course/blob/master/lowcov.md)
 		-	[ngsTools](https://github.com/mfumagalli/EvoGen_course/blob/master/lowcov_ngstools.md)
 		-	[ngsTools/ngsDist](https://github.com/mfumagalli/ngsTools/blob/master/TUTORIAL.md)
@@ -60,7 +58,6 @@ Instructions to download all material necessary for the practical sessions are g
  *	Practical exercises:
 
 	+	estimating demographic parameters through simulations
-
 	+	inference of genetic structure/tree
 
 ### Day 4
@@ -72,7 +69,6 @@ Instructions to download all material necessary for the practical sessions are g
  *	Practical exercises:
 
 	+	selection scan in the human genome and assessment of significance
-
 	+	summary statistics using [ngsTools/ngsDist](https://github.com/mfumagalli/ngsTools/blob/master/TUTORIAL.md)
 
 	
