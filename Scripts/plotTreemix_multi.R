@@ -1,11 +1,14 @@
 
-# Rscript plotTreemix_multi.R results.likes
+# Rscript plotTreemix_multi.R Treemix_dir results.likes
 
 args=commandArgs(T)
-flikes=args[1];
-rm(args);
 
-source("Software/treemix-1.12/src/plotting_funcs.R");
+args=commandArgs(T)
+tmix=args[1]
+flikes=args[2]
+rm(args)
+
+source(paste(tmix,"/src/plotting_funcs.R", sep="",collapse=""))
 
 likes=readLines(flikes)
 

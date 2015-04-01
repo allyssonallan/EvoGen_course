@@ -26,14 +26,20 @@ seaview Results/treemix.nwk
 
 # plot the tree with residuals using the function plotTreemix.R [Treemix directory] [output file root]
 Rscript ../Scripts/plotTreemix.R $TREEMIX Results/treemix.tree
+# this script will create a PDF figure
+# ls Results/*.pdf
+# open Results/treemix.tree.pdf
+# evince Results/treemix.tree.pdf
 
 # 3) Assume 1 migration event
 
-$TREEMIX/src/treemix -i Results/hapmap.frq.strat.treemix.gz -o Results/treemix.tree -root YRI -m 1 -k 50
+$TREEMIX/src/treemix -i Results/hapmap.frq.strat.treemix.gz -o Results/treemix.tree -root YRI -m 1 -k 10
 
 # plot
+Rscript ../Scripts/plotTreemix.R $TREEMIX Results/treemix.tree
 
-Rscript Scripts/plotTreemix.R Results/treemix.tree
+# open Results/treemix.tree.pdf
+# evince Results/treemix.tree.pdf
 
 # 4) Run it multiple times (recording the most likely one) and vary number of mixture events
 
@@ -41,11 +47,11 @@ Rscript Scripts/plotTreemix.R Results/treemix.tree
 
 for K in {1..100};
 
-        do $TREEMIX/src/treemix -i Results/hapmap.frq.strat.treemix.gz -o Results/hapmap.frq.strat.tree.0.${K} -root YRI -k 50;
+        do $TREEMIX/src/treemix -i Results/hapmap.frq.strat.treemix.gz -o Results/hapmap.frq.strat.tree.0.${K} -root YRI -k 10;
 
-        $TREEMIX/src/treemix -i Results/hapmap.frq.strat.treemix.gz -o Results/hapmap.frq.strat.tree.1.${K} -root YRI -m 1 -k 50;
+        $TREEMIX/src/treemix -i Results/hapmap.frq.strat.treemix.gz -o Results/hapmap.frq.strat.tree.1.${K} -root YRI -m 1 -k 10;
 
-        $TREEMIX/src/treemix -i Results/hapmap.frq.strat.treemix.gz -o Results/hapmap.frq.strat.tree.2.${K} -root YRI -m 2 -k 50;
+        $TREEMIX/src/treemix -i Results/hapmap.frq.strat.treemix.gz -o Results/hapmap.frq.strat.tree.2.${K} -root YRI -m 2 -k 10;
 done
 
 # record likelihood values for all repetitions
@@ -54,11 +60,14 @@ tail -n 1 Results/hapmap.frq.strat.tree.*.*.llik | cut -d \: -f 2 > Results/tree
 
 # plot
 
-Rscript Scripts/plotTreemix_multi.R Results/treemix.likes
+Rscript Scripts/plotTreemix_multi.R $TREEMIX Results/treemix.likes
 
-# evince Results/treemix.
+# ls Results/treemix.*
 # treemix.m0.FULL.pdf  treemix.m0.pdf       treemix.m1.FULL.pdf  treemix.m1.pdf       treemix.m2.FULL.pdf  treemix.m2.pdf       treemix.tree.pdf
 
+# open these plots.
 
+# QUESTION
+# How many gene flow events do we need to explain our data?
 
 
