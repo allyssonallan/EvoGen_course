@@ -10,7 +10,7 @@ res=read.table(fin, sep="\t", head=T)
 cols=rep("grey", nrow(res))
 cols[which( (res$chrom %% 2) == 1)]="lightgrey"
 
-pdf(fout)
+jpeg(fout)
 par(mfrow=c(3,1))
 
 for (i in 8:10) {

@@ -14,52 +14,122 @@
 
 # FST is a very commonly used metric to identify changes in allele (or haplotype) frequencies between populations
 
-# we can compute per-site FST values using a method-of-moments estimator
+# Let us assume that we want to detect selection in Europeans (CEU).
+# Therefore compute FST between CEU and a reference/control population (e.g. Africans YRI).
 
+# we can compute per-site FST values using a method-of-moments estimator
+# less -S ../Scripts/plink2fst.R
 Rscript ../Scripts/plink2fst.R
 
 # this generates a file Results/hapmap.fst
 # it may take a while so you can copy it from ../Data
 
+# copy ../Data/hapmap.fst Results/.
 # less -S Results/hapmap.fst
 
+# -----
 
-# Manhattan plots
-Rscript ../Scripts/plotManFST.R Results/hapmap.fst Plots/hapmap.fst.pdf
+# it is convenient to plot the FST values across the genome to identify potential outliers
 
-# calculate PBS
+# produce a Manhattan plots
+Rscript ../Scripts/manPlotFST.R Results/hapmap.fst Results/hapmap.fst.jpeg
+
+# open Results/hapmap.fst.pdf
+# evince Results/hapmap.fst.pdf
+
+# -----
+
+# now open R
+
+# high values of FST indicate a change in allele frequencies between CEU and YRI
+# however, we cannot know whether either YRI or CEU is under selection for these high-FST values
+
+# one strategy would be to calculate an additional statistic and look, for instance, whether loci with high FST are associated with a decrease in nucleotide diversity in YRI or CEU.
+
+# an alternative is to compute a measure of genetic differentiation that uses a 3rd population
+
+# let us compute the Population Branch Statistic (PBS)
+
+# read the FST values
 fst=read.table("Results/hapmap.fst", stringsAsFact=F, header=T)
 
+# PBS(CEU) = ( T(YRI.CEU) + T(CEU.CHB) - T(YRI.CHB) ) / 2
+
+# T could be computed as -log(1-FST)
+
+# QUESTION:
+# calculate PBS values for all SNPs towards testing selection in CEU
+
+# ANSWER:
 # YRI.CEU + CEU.CHB - YRI.CHB
 pbs= ( (-log(1-fst$FST.YRI.CEU)) + (-log(1-fst$FST.CEU.CHB)) - (-log(1-fst$FST.YRI.CHB)) ) / 2
-pbs[which(pbs<0)]=0
+pbs[which(pbs<0)]=0 # set to 0 negative values, for convenience
 
-# plot
+# plot the results (PBS values) across the genome
+# a Manhattan-like plot
 cols=rep("grey", nrow(fst)); cols[which( (fst$chrom %% 2) == 1)]="lightgrey"
-
 plot(x=fst$cpos, y=pbs, col=cols, frame=F, xlab="", xaxt="n", ylab="PBS", main="CEU", pch=16)
 
-# check top hits
+# -----
+
+# how would you identify outliers for PBS?
+
+# first, calculate and plot empirical thresholds
+pbs_th<-quantile(pbs, seq(0.95,0.99,0.01))[c()]
+abline(h=pbs_th, lty=2)
+
+# -----
+
+# check which SNP is the top hit
 fst[which.max(pbs),]
+
+# QUESTION:
+# Where is this SNP located? In which gene? What are the allele frequencies in human populations? Does it show any other signature of selection?
+
+# ANSWER:
 # https://genome-euro.ucsc.edu
 # http://haplotter.uchicago.edu/
 # http://hgdp.uchicago.edu/cgi-bin/gbrowse/HGDP/
 
-# second hit
+# QUESTION:
+# Is it an already known locus under positive selection in Europeans?
+# If so, what is its phenotypic effect? What is the most likely selective pressure?
+
+# ANSWER:
+# http://www.ncbi.nlm.nih.gov/pubmed
+
+
+# -----
+
+# Let us consider the second best candidate SNP based on PBS analysis
+
 fst[which(pbs>1.4 & pbs<2),]
 
-# check which gene
-# rs482000
-# SLC35F3
+# again, let's check its annotation using, for instance, the UCSC Genome Browser
+# rs: rs482000
+# gene: SLC35F3
 
-# compute p-value
+# now we want to assign a p-value to this value of PBS by using neutral simulations
+
+# we will use the program "ms" (be sure to have it installed) to simulate allele frequencies in YRI, CEU and CHB under a model of neutral evolution
+
+# first thing, we need to decide a demographic model for our human populations, and assume it is the one proposed in this paper http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000695
+
 source("../Scripts/functions.R")
 
-ms.command <- "Software/msdir/ms 326 100000 -s 1 -I 3 118 120 88 -n 1 1.68 -n 2 1.12 -n 3 1.12 -eg 0 2 72 -eg 0 3 96 -ma x 2.42 1.52 2.42 x 7.73 1.52 7.73 x -ej 0.029 3 2 -en 0.029 2 0.29 -ej 0.19 2 1 -en 0.30 1 1 | gzip > Results/ms.txt.gz"
+# define the directory where you have installed "ms"
+ms_dir<="/data/data/Software/msdir/ms"
+
+ms.command <- paste(ms_dir, "326 10000 -s 1 -I 3 118 120 88 -n 1 1.68 -n 2 1.12 -n 3 1.12 -eg 0 2 72 -eg 0 3 96 -ma x 2.42 1.52 2.42 x 7.73 1.52 7.73 x -ej 0.029 3 2 -en 0.029 2 0.29 -ej 0.19 2 1 -en 0.30 1 1 | gzip > Results/ms.txt.gz", sep="", collapse="")
 
 system(ms.command, intern=F)
 
+# this will create a file with 10,000 neutral simulations
+
+# read the output
 sim.chroms=readMs("Results/ms.txt.gz" , 326)$hap
+
+# below please find enclosed a possible (slow) solution to compute PBS for each simulated SNP, which will be recorded in an array called sim.pbs
 
 nreps=length(sim.chroms)
 
@@ -78,8 +148,15 @@ for (i in 1:nreps) {
         if ((i %% 100)==0) cat(i, "\t", length(which(sim.pbs>=1.42))/i, "\n")
 
 }
-
 sim.pbs[which(sim.pbs<0)]=0
+
+# for convenience, you can copy it from ../Data folder
+# load("../Data/sim.pbs.RData")
+
+# ---
+
+# QUESTION:
+# from these simulations, compute a p-value to test whether this SNP is (likely to be) under positive selection in Europeans
 
 hist(sim.pbs, main="Simulations under neutrality", xlab="PBS", breaks=20)
 abline(v=1.42, lty=2)
