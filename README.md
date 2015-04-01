@@ -12,62 +12,61 @@ Instructions to download all material necessary for the practical sessions are g
 
 ### Day 1
 
- *	Lecture: From raw NGS data to genotypes ([pdf](https://github.com/mfumagalli/EvoGen_course/tree/master/Slides/slides_day_1.pdf))
+ *	Lecture: From raw NGS data to genotypes ([slides](https://github.com/mfumagalli/EvoGen_course/tree/master/Slides/))
 
- *	Paper discussion: slides ([pdf](https://github.com/mfumagalli/EvoGen_course/tree/master/Slides/slides_day_1_paper.pdf)) and paper ([pdf](http://cteg.berkeley.edu/~nielsen/wordpress/wp-content/uploads/2013/01/Nielsen-R.-et-al.-2011.pdf))
+ *	Paper discussion: ([slides](https://github.com/mfumagalli/EvoGen_course/tree/master/Slides/)) and ([paper](https://github.com/mfumagalli/EvoGen_course/tree/master/Papers/))
 
  *	Practical session: 
-	+	[data filtering](https://github.com/mfumagalli/EvoGen_course/blob/master/filtering.md)
-	+       [genotype calling](https://github.com/mfumagalli/EvoGen_course/blob/master/genocall.md)
+	+	[data filtering](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/filtering.md)
+	+       [genotype calling](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/genocall.md)
 
  *	Additional material:
 
 	+       genotype calling using:
-		-	[SAMtools](https://github.com/mfumagalli/EvoGen_course/blob/master/genocall_samtools.md)
-		-	[BEAGLE](https://github.com/mfumagalli/EvoGen_course/blob/master/imputation.md)
+		-	[SAMtools](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/genocall_samtools.md)
+		-	[BEAGLE](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/imputation.md)
 
 ### Day 2
 
- *	Lecture: SNP calling and advanced methods for evolutionary inferences from NGS data ([pdf](https://github.com/mfumagalli/EvoGen_course/blob/master/slides_day_2.pdf))
+ *	Lecture: SNP calling and advanced methods for evolutionary inferences from NGS data ([slides](https://github.com/mfumagalli/EvoGen_course/tree/master/Slides))
 
- *	Paper discussion: slides ([pdf](https://github.com/mfumagalli/EvoGen_course/blob/master/slides_day_2_paper.pdf)) and papers ([link](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0079667)) ([link](http://journal.frontiersin.org/article/10.3389/fgene.2012.00066/abstract))
+ *	Paper discussion: ([slides](https://github.com/mfumagalli/EvoGen_course/tree/master/Slidesf)) and ([papers](https://github.com/mfumagalli/EvoGen_course/tree/master/Papers/))
 
  *	Practical session: 
 
-	+       [SNP calling](https://github.com/mfumagalli/EvoGen_course/blob/master/snpcall.md)
-	+	advanced methods to estimate [SFS](https://github.com/mfumagalli/EvoGen_course/blob/master/sfs.md)
+	+       [SNP calling](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/snpcall.md)
+	+	advanced methods to estimate [SFS](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/sfs.md)
 
  *	Additional material: 
 
-	+       SNP calling using [SAMtools](https://github.com/mfumagalli/EvoGen_course/blob/master/snpcall_samtools.md)
-	+	estimation of [inbreeding](https://github.com/mfumagalli/EvoGen_course/blob/master/inbreeding.md) coefficients
+	+       SNP calling using [SAMtools](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/snpcall_samtools.md)
+	+	estimation of [inbreeding](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/inbreeding.md) coefficients
 	+	advanced methods to calculate summary statistics using:
-		-	[ANGSD](https://github.com/mfumagalli/EvoGen_course/blob/master/lowcov.md)
-		-	[ngsTools](https://github.com/mfumagalli/EvoGen_course/blob/master/lowcov_ngstools.md)
-		-	[ngsTools/ngsDist](https://github.com/mfumagalli/ngsTools/blob/master/TUTORIAL.md)
-
+		-	[ANGSD](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/lowcov.md)
+		-	[ngsTools](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/lowcov_ngstools.md)
+		-	[ngsTools/ngsDist](https://github.com/mfumagalli/ngsTools/tree/master/Files/TUTORIAL.md)
 
 
 ### Day 3
 
- *	Lecture: Population structure and demographic inferences ([pdf](https://github.com/mfumagalli/EvoGen_course/blob/master/slides_day_3.pdf))
+ *	Lecture: Population structure and demographic inferences ([slides](https://github.com/mfumagalli/EvoGen_course/tree/master/Slides/))
 
- *	Journal discussion: slides ([pdf](https://github.com/mfumagalli/EvoGen_course/blob/master/slides_day_3_paper.pdf)) and paper ([pdf](https://github.com/mfumagalli/EvoGen_course/blob/master/Moltke_AJHG_2015.pdf))
+ *	Paper discussion: ([slides](https://github.com/mfumagalli/EvoGen_course/tree/master/Slides)) and ([paper](https://github.com/mfumagalli/EvoGen_course/tree/master/Papers))
 
  *	Practical exercises:
 
-	+	estimating demographic parameters through simulations ([R script](https://github.com/mfumagalli/EvoGen_course/blob/master/practise_day_3.R))
-	+	inference of population splits and mixture events using TreeMix ([bash script](https://github.com/mfumagalli/EvoGen_course/blob/master/practise_day_3_extra.txt))
+	+	estimating demographic parameters through simulations ([R script](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/practise_day_3.R))
+	+	inference of population splits and mixture events using TreeMix ([bash script](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/practise_day_3_extra.txt))
 
 ### Day 4
 
- *	Lecture: Detecting natural selection ([pdf](https://github.com/mfumagalli/EvoGen_course/blob/master/slides_day_4.pdf))
+ *	Lecture: Detecting natural selection ([slides](https://github.com/mfumagalli/EvoGen_course/blob/master/slides_day_4.pdf))
 
- *	Journal discussion: slides ([pdf](https://github.com/mfumagalli/EvoGen_course/blob/master/slides_day_4_paper.pdf)) and paper ([pdf](https://github.com/mfumagalli/EvoGen_course/blob/master/Liu_Cell_2014.pdf))
+ *	Paper discussion: slides ([pdf](https://github.com/mfumagalli/EvoGen_course/tree/master/Slides)) and ([paper](https://github.com/mfumagalli/EvoGen_course/tree/master/Papers))
 
  *	Practical exercises:
 
-	+	selection scan in the human genome and assessment of significance ([R script](https://github.com/mfumagalli/EvoGen_course/blob/master/practise_day_4.R))
+	+	selection scan in the human genome and assessment of significance ([R script](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/practise_day_4.R))
 	+	summary statistics using [ngsTools/ngsDist](https://github.com/mfumagalli/ngsTools/blob/master/TUTORIAL.md)
 
 ### Day 5
