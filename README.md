@@ -1,4 +1,3 @@
-
 # EvoGen_course
 
 Evolutionary Genomics course - Data Analysis module
@@ -81,11 +80,6 @@ Sequencing data on butterfiles has been kindly provided by [Zach Gompert](https:
 ANGSD has been developed by Thorfinn Korneliussen and Anders Albrechtsen. 
 Filipe G. Vieira implemented the inbreeding estimation. 
 Tyler Linderoth wrote most of data filtering scripts together with [Sonal Singhai](https://systemsbiology.columbia.edu/people/sonal-singhal), [Ke Bi](http://scholar.google.ca/citations?user=ymcwERQAAAAJ), and Filipe G. Vieira.
-
-
-
-
-
 
 
 
