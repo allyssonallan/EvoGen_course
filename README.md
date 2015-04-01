@@ -37,7 +37,7 @@ Instructions to download all material necessary for the practical sessions are g
 
  *	Lecture: SNP calling and advanced methods for evolutionary inferences from NGS data ([slides](https://github.com/mfumagalli/EvoGen_course/tree/master/Slides))
 
- *	Paper discussion: ([slides](https://github.com/mfumagalli/EvoGen_course/tree/master/Slidesf)) and ([papers](https://github.com/mfumagalli/EvoGen_course/tree/master/Papers/))
+ *	Paper discussion: ([slides](https://github.com/mfumagalli/EvoGen_course/tree/master/Slides)) and ([papers](https://github.com/mfumagalli/EvoGen_course/tree/master/Papers/))
 
  *	Practical session: 
 

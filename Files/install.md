@@ -55,27 +55,28 @@ This dataset comprises 33 individuals of European descent.
 
  - Genotype likelihoods from inbred samples will be generated on-the-run.
 
-All these files can be downloaded [[http://palin.popgen.dk/mfumagalli/Workshop/ANU/web/input.tar.gz][here]]. Untar these files by typing:
-<src>
+ - Genetic data for demographic and selection inferences are provided in the [Data](https://github.com/mfumagalli/EvoGen_course/tree/master/Data) folder.
+
+All these files can be downloaded [here](http://palin.popgen.dk/mfumagalli/Workshop/ANU/web/input.tar.gz).
+Untar these files by typing:
+```
 tar -xvf input.tar.gz
 rm input.tar.gz
-</src>
+```
 This file is rather big (~550M)
 You can use a smaller version (~100M) if you prefer, but you will not be able to run examples on human dataset.
-If this is the case, you can download it [[http://palin.popgen.dk/mfumagalli/Workshop/ANU/web/input_light.tar.gz][here]].
-<src>
+If this is the case, you can download it [here](http://palin.popgen.dk/mfumagalli/Workshop/ANU/web/input_light.tar.gz).
+```
 tar -xvf input_light.tar.gz
 rm input_light.tar.gz
 mv input_light/ input/ # if you run this you will not be able to use human examples
-</src>
+```
 
-I added already generated output files, as a back up:
-
-As a back up, you can find my output files [[http://palin.popgen.dk/mfumagalli/Workshop/ANU/web/myoutput.tar.gz][here]].
-<src>
+I added already generated output files, as a back up, [here](http://palin.popgen.dk/mfumagalli/Workshop/ANU/web/myoutput.tar.gz).
+```
 tar -xvf myoutput.tar.gz
 rm myoutput.tar.gz
-</src>
+```
 
 
 ## Preparation
@@ -107,144 +108,146 @@ To view a list of possible options, and check that everything worked for instanc
 
 ------------
 
-SAMtools can be downloaded [[http://sourceforge.net/projects/samtools/files/][here]]. Please use version 0.1.19. Then type:
-<src>
+SAMtools can be downloaded [here](http://sourceforge.net/projects/samtools/files/). Please use version 0.1.19. Then type:
+```
 tar xvjf samtools-0.1.19.tar.bz2
 rm samtools-0.1.19.tar.bz2
 cd samtools-0.1.19
 make
 make razip # this is optional
 cd ..
-</src>
+```
 To check that everything went fine, type the following commands and check whether help messages are printed:
-<src>
+```
 samtools-0.1.19/samtools
 samtools-0.1.19/bcftools/bcftools
-</src>
+```
 
 VCFtools can be obtained [[http://sourceforge.net/projects/vcftools/files/][here]]. Version 0.1.11 is fine. Then type:
-<src>
+```
 tar xzvf vcftools_0.1.11.tar.gz
 rm vcftools_0.1.11.tar.gz
 cd vcftools_0.1.11
 make
 cd..
-</src>
+```
 
 -------
 
 For data filtering, we will use:
 
-- [[https://github.com/vsbuffalo/scythe][Scythe]]
+- [Scythe](https://github.com/vsbuffalo/scythe)
 
-<src>
+```
 git clone https://github.com/vsbuffalo/scythe.git
 cd scythe
 make all
 cd ..
-</src>
+```
 
-- [[https://github.com/najoshi/sickle][Sickle]]
+- [Sickle](https://github.com/najoshi/sickle)
 
-<src>
+```
 git clone https://github.com/najoshi/sickle.git
 cd sickle
 make
 cd ..
-</src>
+```
 
-- [[http://picard.sourceforge.net/][Picard]]
+- [Picard](http://picard.sourceforge.net)
 
-Download the latest zipped version [[http://sourceforge.net/projects/picard/files/][here]] and unzip it.
-You need [[http://www.java.com/en/][Java]] to run Picard tool.
+Download the latest zipped version [here](http://sourceforge.net/projects/picard/files) and unzip it.
+You need [Java](http://www.java.com/en/) to run Picard tool.
 
-You may want to install FastQC as well, available [[http://www.bioinformatics.babraham.ac.uk/projects/fastqc/][here]].
+You may want to install FastQC as well, available [here](http://www.bioinformatics.babraham.ac.uk/projects/fastqc).
 
-For the solution of an exercise we will use [[https://code.google.com/p/cutadapt/][cutadapt]].
-You can use the git repository to install it from [[https://github.com/marcelm/cutadapt][here]].
+For the solution of an exercise we will use [cutadapt](https://code.google.com/p/cutadapt/).
+You can use the git repository to install it from [here](https://github.com/marcelm/cutadapt).
 You need Python to run it.
 
 ------
 
-Lastly, we will also assume that you have perl (for parsing) and R (with Rscript, for plotting) installed in your /usr/bin directory. To test if this is the case, type:
-<src>
+Lastly, we will also assume that you have perl (for parsing) and R (with Rscript, for plotting) installed in your /usr/bin directory. 
+Also, python may be used.
+To test if this is the case, type:
+```
 perl --help
 R --help
 Rscript --help
-</src>
-and check that this prints out help messages. Otherwise install them following instructions reported [[http://www.perl.org/get.html][here]] and [[http://www.r-project.org/][here]]. You will also need some R packages to run all examples, and these are: 'ggplot2', 'VennDiagram', 'optparse'. To install a package in R, open R and type:
-<src>
+python --help
+````
+and check that this prints out help messages. Otherwise install them following instructions reported [here](http://www.perl.org/get.html) and [here](http://www.r-project.org/). You will also need some R packages to run all examples, and these are: 'ggplot2', 'VennDiagram', 'optparse'. To install a package in R, open R and type:
+```
 install.packages("ggplot2")
 install.packages("VennDiagram")
 install.packages("optparse")
-</src>
+```
 You will be asked to select a mirror, and eventually to first install some missing dependencies. Close R by typing 'q()' and type 'n' if you are asked whether to save the current workspace.
 
-Also [[http://en.wikipedia.org/wiki/AWK][awk]] will be sometimes used to parse files.
+Also [awk](http://en.wikipedia.org/wiki/AWK) will be sometimes used to parse files.
 
-Files will be un/compressed using gunzip, bzip2 and bunzip2, some details can be found [[http://osxdaily.com/2012/05/29/create-extract-bz2-mac-os-x/][here]] and [[http://linux.about.com/library/cmd/blcmdl1_bunzip2.htm][here]].
+Files will be un/compressed using gunzip, bzip2 and bunzip2, some details can be found [here](http://osxdaily.com/2012/05/29/create-extract-bz2-mac-os-x/) and [here](http://linux.about.com/library/cmd/blcmdl1_bunzip2.htm).
 
-A Perl script will use Statistics::Distributions package, available for download [[http://search.cpan.org/~mikek/Statistics-Distributions-1.02/Distributions.pm][here]]. 
+A Perl script will use Statistics::Distributions package, available for download [here](http://search.cpan.org/~mikek/Statistics-Distributions-1.02/Distributions.pm). 
 The easiest way to install it is to run:
-<src>
+```
 sudo cpan Statistics::Distributions
-</src>
+```
 If it fails, download the .tar.gz file, then unzipped it and install it:
-<src>
+```
 tar -xvzf Statistics-Distributions-1.02.tar.gz
 cd Statistics-Distributions-1.02
 perl Makefile.PL 
 make test
 cd..
-</src>
+```
 You need to make sure that the package has been correctly added your Perl directory.
 
-Likewise you may need to install this additional package [[http://search.cpan.org/~pmqs/IO-Compress-2.064/lib/IO/Compress/Bzip2.pm][IO-Compress]]:
-<src>
+Likewise you may need to install this additional package [IO-Compress](http://search.cpan.org/~pmqs/IO-Compress-2.064/lib/IO/Compress/Bzip2.pm):
+```
 sudo cpan IO::Compress::Bzip2
 # if it does not work try: sudo cpan force install IO::Compress::Bzip2
-</src>
+```
 or manually:
-<src>
+```
 tar -xvzf IO-Compress-2.064.tar.gz
 cd IO-Compress-2.064
 perl Makefile.PL
 cd ..
-</src>
-and Getopt which should be already installed, otherwise see [[http://search.cpan.org/~jhi/perl-5.8.1/lib/Getopt/Std.pm][here]].
+```
+and Getopt which should be already installed, otherwise see [here](http://search.cpan.org/~jhi/perl-5.8.1/lib/Getopt/Std.pm).
 Before being worried that something failed, read below for a quick test to check that this perl script indeed works.
 
 ------------
 
-You will also need some scripts available [[http://palin.popgen.dk/mfumagalli/Workshop/ANU/web/scripts.tar.gz][here]]. Untar these files by typing:
-
-<src>
+You will also need some scripts available [here](http://palin.popgen.dk/mfumagalli/Workshop/ANU/web/scripts.tar.gz). Untar these files by typing:
+```
 tar -xvf scripts.tar.gz
 rm scripts.tar.gz
-</src>
+```
 
 To test that you have all required packages in Perl type:
-<src>
+```
 perl ../scripts/SNPcleaner.pl --help
-</src>
+```
 and see if it prints out something or errors.
 
-Optionally, you can download [[http://www.broadinstitute.org/gatk/][GATK]] and [[https://github.com/ekg/freebayes][FreeBayes]], as they will be briefly mentioned and discussed as supplementary information.
+Optionally, you can download [GATK](http://www.broadinstitute.org/gatk/) and [FreeBayes](https://github.com/ekg/freebayes), as they will be briefly mentioned and discussed as supplementary information.
 
 *** Misc
 
-In case no internet connection will be available, you can download some files we will generate [[http://palin.popgen.dk/mfumagalli/Workshop/ANU/web/data.tar.gz][here]].
+In case no internet connection will be available, you can download some files we will generate [here](http://palin.popgen.dk/mfumagalli/Workshop/ANU/web/data.tar.gz).
 I will also include PDFs of some of the cited references.
-<src>
+```
 tar -xvf data.tar.gz
 rm data.tar.gz
-</src>
+```
 
-As a back up, you can find my output files [[http://palin.popgen.dk/mfumagalli/Workshop/ANU/web/myoutput.tar.gz][here]].
-<src>
+As a back up, you can find my output files [here](http://palin.popgen.dk/mfumagalli/Workshop/ANU/web/myoutput.tar.gz).
+```
 tar -xvf myoutput.tar.gz
 rm myoutput.tar.gz
-</src>
+```
 
 
 
