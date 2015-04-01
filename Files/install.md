@@ -123,7 +123,7 @@ samtools-0.1.19/samtools
 samtools-0.1.19/bcftools/bcftools
 ```
 
-VCFtools can be obtained [[http://sourceforge.net/projects/vcftools/files/][here]]. Version 0.1.11 is fine. Then type:
+VCFtools can be obtained [here](http://sourceforge.net/projects/vcftools/files/). Version 0.1.11 is fine. Then type:
 ```
 tar xzvf vcftools_0.1.11.tar.gz
 rm vcftools_0.1.11.tar.gz
@@ -234,7 +234,7 @@ and see if it prints out something or errors.
 
 Optionally, you can download [GATK](http://www.broadinstitute.org/gatk/) and [FreeBayes](https://github.com/ekg/freebayes), as they will be briefly mentioned and discussed as supplementary information.
 
-*** Misc
+### Misc
 
 In case no internet connection will be available, you can download some files we will generate [here](http://palin.popgen.dk/mfumagalli/Workshop/ANU/web/data.tar.gz).
 I will also include PDFs of some of the cited references.
