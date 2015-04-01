@@ -67,7 +67,7 @@ Instructions to download all material necessary for the practical sessions are g
 
 ### Day 4
 
- *	Lecture: Detecting natural selection ([slides](https://github.com/mfumagalli/EvoGen_course/blob/master/slides_day_4.pdf))
+ *	Lecture: Detecting natural selection ([slides](https://github.com/mfumagalli/EvoGen_course/tree/master/Slides))
 
  *	Paper discussion: slides ([pdf](https://github.com/mfumagalli/EvoGen_course/tree/master/Slides)) and ([paper](https://github.com/mfumagalli/EvoGen_course/tree/master/Papers))
 
