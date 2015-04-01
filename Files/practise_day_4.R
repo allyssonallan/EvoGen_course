@@ -32,7 +32,7 @@ Rscript ../Scripts/plink2fst.R
 # it is convenient to plot the FST values across the genome to identify potential outliers
 
 # produce a Manhattan plots
-Rscript ../Scripts/manPlotFST.R Results/hapmap.fst Results/hapmap.fst.jpeg
+Rscript ../Scripts/manPlotFST.R Results/hapmap.fst Results/hapmap.fst.jpg
 
 # open Results/hapmap.fst.pdf
 # evince Results/hapmap.fst.pdf
