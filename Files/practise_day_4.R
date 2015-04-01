@@ -34,8 +34,7 @@ Rscript ../Scripts/plink2fst.R
 # produce a Manhattan plots
 Rscript ../Scripts/manPlotFST.R Results/hapmap.fst Results/hapmap.fst.jpg
 
-# open Results/hapmap.fst.pdf
-# evince Results/hapmap.fst.pdf
+# open Results/hapmap.fst.jpg
 
 # -----
 
@@ -74,8 +73,8 @@ plot(x=fst$cpos, y=pbs, col=cols, frame=F, xlab="", xaxt="n", ylab="PBS", main="
 
 # how would you identify outliers for PBS?
 
-# first, calculate and plot empirical thresholds
-pbs_th<-quantile(pbs, seq(0.95,0.99,0.01))[c()]
+# first, calculate and plot empirical thresholds (e.g. 99th and 99.9th)
+pbs_th<-quantile(pbs, seq(0.99,0.999,0.001), na.rm=T)[c(1,10)]
 abline(h=pbs_th, lty=2)
 
 # -----
@@ -84,7 +83,7 @@ abline(h=pbs_th, lty=2)
 fst[which.max(pbs),]
 
 # QUESTION:
-# Where is this SNP located? In which gene? What are the allele frequencies in human populations? Does it show any other signature of selection?
+# Where is this SNP located? In which gene? What are the allele frequencies in human populations? Is the derived or ancestral allele at high frequency in Europeans? Does it show any other signature of selection?
 
 # ANSWER:
 # https://genome-euro.ucsc.edu
@@ -103,7 +102,7 @@ fst[which.max(pbs),]
 
 # Let us consider the second best candidate SNP based on PBS analysis
 
-fst[which(pbs>1.4 & pbs<2),]
+fst[which.max(pbs[-which.max(pbs)]),]
 
 # again, let's check its annotation using, for instance, the UCSC Genome Browser
 # rs: rs482000
@@ -118,9 +117,9 @@ fst[which(pbs>1.4 & pbs<2),]
 source("../Scripts/functions.R")
 
 # define the directory where you have installed "ms"
-ms_dir<="/data/data/Software/msdir/ms"
+ms_dir<-"/data/data/Software/msdir/ms"
 
-ms.command <- paste(ms_dir, "326 10000 -s 1 -I 3 118 120 88 -n 1 1.68 -n 2 1.12 -n 3 1.12 -eg 0 2 72 -eg 0 3 96 -ma x 2.42 1.52 2.42 x 7.73 1.52 7.73 x -ej 0.029 3 2 -en 0.029 2 0.29 -ej 0.19 2 1 -en 0.30 1 1 | gzip > Results/ms.txt.gz", sep="", collapse="")
+ms.command <- paste(ms_dir, "326 10000 -s 1 -I 3 118 120 88 -n 1 1.68 -n 2 1.12 -n 3 1.12 -eg 0 2 72 -eg 0 3 96 -ma x 2.42 1.52 2.42 x 7.73 1.52 7.73 x -ej 0.029 3 2 -en 0.029 2 0.29 -ej 0.19 2 1 -en 0.30 1 1 | gzip > Results/ms.txt.gz")
 
 system(ms.command, intern=F)
 
@@ -150,18 +149,22 @@ for (i in 1:nreps) {
 }
 sim.pbs[which(sim.pbs<0)]=0
 
-# for convenience, you can copy it from ../Data folder
-# load("../Data/sim.pbs.RData")
-
 # ---
 
 # QUESTION:
 # from these simulations, compute a p-value to test whether this SNP is (likely to be) under positive selection in Europeans
 
+# ANSWER:
+length(which(sim.pbs>=1.42)) / length(sim.pbs)
+# or
+length(which(sim.pbs>=1.42)) / length(which(!is.na(sim.pbs)))
+
+# plot
 hist(sim.pbs, main="Simulations under neutrality", xlab="PBS", breaks=20)
 abline(v=1.42, lty=2)
 
 
-
+# EXERCISE
+# Run at least 100,000 simulations and assess the significance of this PBS value by jointly considering its DAF (derived allele frequency) and PBS value. In other words, record the significance intervals on a DAF-PBS Cartesian plot and check whether this SNP is indeed an outlier
 
 
