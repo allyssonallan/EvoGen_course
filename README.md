@@ -6,6 +6,13 @@ Evolutionary Genomics course - Data Analysis module
 
 ## Material
 
+	git clone https://github.com/mfumagalli/EvoGen_course
+	cd EvoGen_course
+	mkdir Work
+	cd Work
+	mkdir Results
+
+
 Instructions to download all material necessary for the practical sessions are given [here](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/install.md).
 
 ## Agenda

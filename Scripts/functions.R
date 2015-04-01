@@ -1,4 +1,7 @@
 
+library("grid")
+library("maps")
+library("spam")
 library("fields")
 
 
