@@ -1,9 +1,9 @@
 
 # plink files
-fin="Data/hapmap.frq.strat"
-fbim="Data/hapmap.bim"
+fin="../Data/hapmap.frq.strat"
+fbim="../Data/hapmap.bim"
 
-source("Scripts/functions.R")
+source("../Scripts/functions.R")
 
 # read allele frequencies and SNPs coordinates
 res=read.table(fin, stringsAsFactors=F, header=T)
