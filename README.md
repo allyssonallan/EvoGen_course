@@ -6,15 +6,15 @@ Evolutionary Genomics course - Data Analysis module
 
 ## Material
 
-Instructions to download all material necessary for the practical sessions are given [here](https://github.com/mfumagalli/EvoGen_course/blob/master/install.md).
+Instructions to download all material necessary for the practical sessions are given [here](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/install.md).
 
 ## Agenda
 
 ### Day 1
 
- *	Lecture: From raw NGS data to genotypes ([pdf](https://github.com/mfumagalli/EvoGen_course/blob/master/slides_day_1.pdf))
+ *	Lecture: From raw NGS data to genotypes ([pdf](https://github.com/mfumagalli/EvoGen_course/tree/master/Slides/slides_day_1.pdf))
 
- *	Paper discussion: slides ([pdf](https://github.com/mfumagalli/EvoGen_course/blob/master/slides_day_1_paper.pdf)) and paper ([pdf](http://cteg.berkeley.edu/~nielsen/wordpress/wp-content/uploads/2013/01/Nielsen-R.-et-al.-2011.pdf))
+ *	Paper discussion: slides ([pdf](https://github.com/mfumagalli/EvoGen_course/tree/master/Slides/slides_day_1_paper.pdf)) and paper ([pdf](http://cteg.berkeley.edu/~nielsen/wordpress/wp-content/uploads/2013/01/Nielsen-R.-et-al.-2011.pdf))
 
  *	Practical session: 
 	+	[data filtering](https://github.com/mfumagalli/EvoGen_course/blob/master/filtering.md)
@@ -70,7 +70,10 @@ Instructions to download all material necessary for the practical sessions are g
 	+	selection scan in the human genome and assessment of significance ([R script](https://github.com/mfumagalli/EvoGen_course/blob/master/practise_day_4.R))
 	+	summary statistics using [ngsTools/ngsDist](https://github.com/mfumagalli/ngsTools/blob/master/TUTORIAL.md)
 
-	
+### Day 5
+
+Evaluation.
+
 
 
 ## Credits
