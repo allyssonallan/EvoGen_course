@@ -1,7 +1,6 @@
 
 # load all R functions we need
 source("Scripts/functions.R")
-library(fields)
 
 ## 1) READ AND STORE OBSERVED GENETIC DATA (2D-SFS)
 
