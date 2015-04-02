@@ -58,6 +58,8 @@ This dataset comprises 33 individuals of European descent.
  - Genetic data for demographic and selection inferences are provided in the [Data](https://github.com/mfumagalli/EvoGen_course/tree/master/Data) folder.
 
 All these files can be downloaded [here](http://palin.popgen.dk/mfumagalli/Workshop/ANU/web/input.tar.gz).
+User is `student` and password is `ANU`.
+
 Untar these files by typing:
 ```
 tar -xvf input.tar.gz
@@ -81,11 +83,12 @@ rm myoutput.tar.gz
 
 ## Preparation
 
-First, you can create a folder where we will put all material (and results) for this day.
+Assuming you are inside the `EvoGen_course/Work` folder previously created, you can create a folder where we will put all material (and results) for these 2 days.
 ```
-mkdir workshop
-cd workshop
+mkdir bioinfo
+cd bioinfo
 mkdir output
+mv ../input .
 ```
 
 ----------
@@ -103,33 +106,43 @@ You may see a lot of warnings, but as long as they are not errors (and compilati
 To view a list of possible options, and check that everything worked for instance for ANGSD, simply type:
 ```
 ./angsd/angsd
-
 ```
+
+Then go back to your previous directory by typing `cd ..`.
 
 ------------
 
-SAMtools can be downloaded [here](http://sourceforge.net/projects/samtools/files/). Please use version 0.1.19. Then type:
+SAMtools and BCFtools can be downloaded [here](http://www.htslib.org/download/). Please use version 1.2. Then type:
 ```
-tar xvjf samtools-0.1.19.tar.bz2
-rm samtools-0.1.19.tar.bz2
-cd samtools-0.1.19
+tar xvjf samtools-1.2.tar.bz2
+rm samtools-1.2.tar.bz2
+cd samtools-1.2
 make
-make razip # this is optional
+cd ..
+tar xvjf bcftools-1.2.tar.bz2
+rm bcftools-1.2.tar.bz2
+cd bcftools-1.2
+make
 cd ..
 ```
+
+
 To check that everything went fine, type the following commands and check whether help messages are printed:
 ```
-samtools-0.1.19/samtools
-samtools-0.1.19/bcftools/bcftools
+samtools-1.2/samtools
+bcftools-1.2/bcftools
 ```
 
-VCFtools can be obtained [here](http://sourceforge.net/projects/vcftools/files/). Version 0.1.11 is fine. Then type:
+-------------
+
+VCFtools can be obtained [here](http://sourceforge.net/projects/vcftools/files/). Version 0.1.12b is fine. Then type:
 ```
-tar xzvf vcftools_0.1.11.tar.gz
-rm vcftools_0.1.11.tar.gz
-cd vcftools_0.1.11
+tar xzvf vcftools_0.1.12b.tar.gz
+rm vcftools_0.1.12b.tar.gz
+cd vcftools_0.1.12b
 make
 cd..
+./vcftools_0.1.12b/bin/vcftools
 ```
 
 -------
@@ -143,6 +156,7 @@ git clone https://github.com/vsbuffalo/scythe.git
 cd scythe
 make all
 cd ..
+./scythe/scythe
 ```
 
 - [Sickle](https://github.com/najoshi/sickle)
@@ -152,14 +166,17 @@ git clone https://github.com/najoshi/sickle.git
 cd sickle
 make
 cd ..
+./sickle/sickle
 ```
+
+You may want to install FastQC as well, available [here](http://www.bioinformatics.babraham.ac.uk/projects/fastqc).
+
+Optionally one could download some additional programs (mentioned below), as they will be cited in the course.
 
 - [Picard](http://picard.sourceforge.net)
 
 Download the latest zipped version [here](http://sourceforge.net/projects/picard/files) and unzip it.
 You need [Java](http://www.java.com/en/) to run Picard tool.
-
-You may want to install FastQC as well, available [here](http://www.bioinformatics.babraham.ac.uk/projects/fastqc).
 
 For the solution of an exercise we will use [cutadapt](https://code.google.com/p/cutadapt/).
 You can use the git repository to install it from [here](https://github.com/marcelm/cutadapt).
@@ -167,8 +184,7 @@ You need Python to run it.
 
 ------
 
-Lastly, we will also assume that you have perl (for parsing) and R (with Rscript, for plotting) installed in your /usr/bin directory. 
-Also, python may be used.
+Lastly, we will also assume that you have perl (for parsing) and R (with Rscript, for plotting) installed in your /usr/bin directory.  Also, python may be used.
 To test if this is the case, type:
 ```
 perl --help
@@ -184,11 +200,11 @@ install.packages("optparse")
 ```
 You will be asked to select a mirror, and eventually to first install some missing dependencies. Close R by typing 'q()' and type 'n' if you are asked whether to save the current workspace.
 
-Also [awk](http://en.wikipedia.org/wiki/AWK) will be sometimes used to parse files.
+Also [awk](http://en.wikipedia.org/wiki/AWK) will be sometimes used to parse files, in some optional examples.
 
 Files will be un/compressed using gunzip, bzip2 and bunzip2, some details can be found [here](http://osxdaily.com/2012/05/29/create-extract-bz2-mac-os-x/) and [here](http://linux.about.com/library/cmd/blcmdl1_bunzip2.htm).
 
-A Perl script will use Statistics::Distributions package, available for download [here](http://search.cpan.org/~mikek/Statistics-Distributions-1.02/Distributions.pm). 
+For some optional exercises, a Perl script will use Statistics::Distributions package, available for download [here](http://search.cpan.org/~mikek/Statistics-Distributions-1.02/Distributions.pm). 
 The easiest way to install it is to run:
 ```
 sudo cpan Statistics::Distributions
@@ -228,7 +244,7 @@ rm scripts.tar.gz
 
 To test that you have all required packages in Perl type:
 ```
-perl ../scripts/SNPcleaner.pl --help
+perl scripts/SNPcleaner.pl --help
 ```
 and see if it prints out something or errors.
 

@@ -1,4 +1,6 @@
 
+Make sure in you are in the correct directory (`EvoGen_course/Work/bioinfo`).
+
 **WORKFLOW**:
 LAB WORK > SEQUENCING > LOW-LEVEL DATA (reads)
 
@@ -137,7 +139,7 @@ You can specify the minimum match length argument (-n) and the minimum length of
 ```
 We can even have a look at all matches found by the program
 ```
-less output/scythe_matches.txt
+less -S output/scythe_matches.txt
 
  p(c|s): 1.000000; p(!c|s): 0.000000; adapter: P7_index1
  HWI-ST745_0097:2:1101:1009:1000#0/2
@@ -313,7 +315,7 @@ We will later see how SAMtools can be useful to assign SNPs and genotypes.
 
 Let us have a look at all the options in SAMtools to convert from SAM to BAM:
 ```
-./samtools-0.1.19/samtools view
+./samtools-1.2/samtools view
 ```
 Therefore, if we want to convert a file from SAM to BAM we need to run something like:
 ```
@@ -324,7 +326,7 @@ Therefore, if we want to convert a file from SAM to BAM we need to run something
 Let us use the butterly dataset to illustrate these example.
 ```
 # convert BAM to SAM
-./samtools-0.1.19/samtools view input/lyca/bam/lan_10_09f.bam > output/lan_10_09f.sam
+./samtools-1.2/samtools view input/lyca/bam/lan_10_09f.bam > output/lan_10_09f.sam
 less -S output/lan_10_09f.sam
 ```
 
@@ -333,15 +335,15 @@ In case we use a reference sequence (and visualize the alignment), we need to in
 `sort` is a prerequiste for `index`.
 
 ```
-./samtools-0.1.19/samtools sort input/lyca/bam/lan_10_09f.bam output/lan_10_09f.sorted
-./samtools-0.1.19/samtools index output/lan_10_09f.sorted.bam
-./samtools-0.1.19/samtools faidx input/lyca/referenceseq.fasta
+./samtools-1.2/samtools sort input/lyca/bam/lan_10_09f.bam output/lan_10_09f.sorted
+./samtools-1.2/samtools index output/lan_10_09f.sorted.bam
+./samtools-1.2/samtools faidx input/lyca/referenceseq.fasta
 ```
 
 We can now have a look at the reads alignment, using `tview` utility in SAMtools.
 It assumes that indexed files are in the same directory of the original BAM and FASTA files.
 ```
-./samtools-0.1.19/samtools tview output/lan_10_09f.sorted.bam input/lyca/referenceseq.fasta
+./samtools-1.2/samtools tview output/lan_10_09f.sorted.bam input/lyca/referenceseq.fasta
 ```
 Type `q` or `ctrl-c` to close it.
 This can be useful to inspect specific regions like indels or inversions.
@@ -383,18 +385,18 @@ Additionally once can simply use available tools like **[VCFtools](http://vcftoo
 ... > MAPPED READS > FILTERING SITES (mpileup)
 
 As a first step we will use SAMtools to apply mapped reads quality filters.
-We will use **mpileup** utilities implemented in SAMttols for this purpose.
+We will use **mpileup** utilities implemented in SAMtools for this purpose.
 
 First, let us make sure that our BAM files are sorted and indexed:
 ```
 ls input/lyca/bam/*bam > input/lyca/bams.list
-for i in input/lyca/bam/*.bam; do samtools-0.1.19/samtools index $i; done
-./samtools-0.1.19/samtools faidx input/lyca/referenceseq.fasta
+for i in input/lyca/bam/*.bam; do samtools-1.2/samtools index $i; done
+./samtools-1.2/samtools faidx input/lyca/referenceseq.fasta
 ```
 
 Now we are ready to run the mpileup command on a subset of the data:
 ```
-./samtools-0.1.19/samtools mpileup -AI -q 0 -Q 20 -C 50 -f input/lyca/referenceseq.fasta -b input/lyca/bams.list -r ref_contig:1-10000 > output/lyca.mpileup 2> /dev/null
+./samtools-1.2/samtools mpileup -AI -q 0 -Q 20 -C 50 -f input/lyca/referenceseq.fasta -b input/lyca/bams.list -r ref_contig:1-10000 > output/lyca.mpileup
 ```
 
 Options `-q -Q -C` are related to reads quality filtering:
@@ -464,13 +466,13 @@ FORMAT | Format of the individual genotypes
 --------------
 
 We can rerun mpileup command and pipe it output dircetly to **bcftools**, a program that analyzes BCF files.
-We need to specify `-g` option to print out BCF format (and not pileup format).
-Moreover, `-D` and `-S` options will output depth and strand bias p-values, metrics that we will use for data filtering. 
+We need to specify `-O v` option to print out VCF format.
+Moreover, `-t DP` and `-t SP` options will output depth and strand bias p-values, metrics that we will use for data filtering. 
 As you can see bcftools is primarly used to call SNPs and genotypes.
 Let us ignore this now and print out all sites, whether they might be variable or not in our sample. 
 
 ```
-./samtools-0.1.19/samtools mpileup -u -AIDS -q 0 -Q 20 -C 50 -f input/lyca/referenceseq.fasta -b input/lyca/bams.list -r ref_contig:1-10000 2> /dev/null | ./samtools-0.1.19/bcftools/bcftools view -gI - > output/lyca.raw.vcf 2> /dev/null
+./samtools-1.2/samtools mpileup -u -AI -t DP -t SP -q 0 -Q 20 -C 50 -f input/lyca/referenceseq.fasta -b input/lyca/bams.list -r ref_contig:1-10000 | ./bcftools-1.2/bcftools view -I -O v - > output/lyca.raw.vcf
 ```
 Again, for large datasets it is recommended to gzip output files (e.g. by piping out `pbzip2 > out.vcf.bz2`). 
 
@@ -533,11 +535,17 @@ Allele bias in potential heterozygotes tests for potential barcode/allele swappi
 
 Let us see the options for this script (implemented by T. Linderoth and F.G. Vieira and others).
 This script reads a VCF file and filter SNPs based on a set of rules. 
-It is similar to SAMtools `varfilter.pl` script but it extends some of the filters.
-Please note that this script is only for SNP filtering and will ignore INDELs (which we have already filtered out using SAMtools).
+
+We can use SAMtools `varfilter.pl` script to perform some of the filters.
+This script reads a VCF file and filter SNPs based on a set of rules.
+Please note that we are ignoring INDELs (which we have already filtered out using SAMtools).
+
+Alternatively, one can use SNPCleaner (available in your scripts/ folder and also [here](https://github.com/fgvieira/ngsClean), mostly implemented by T. Linderoth and F.G. Vieira).
+We provide a tutorial to use such filtering tool [here](https://github.com/mfumagalli/EvoGen_course/tree/Files/filtering_snpcleaner.pl), although it may not be fully stable with more recent version of SAMtools.
+
 
 ```
-perl ../scripts/SNPcleaner.pl --help
+perl scripts/SNPcleaner.pl --help
 
 Usage: 
 SNPcleaner.pl [OPTIONS] <infile.vcf>
@@ -628,7 +636,7 @@ First we want to remove sites with extremely low or high depth.
 Let us get the empirical distribution.
 
 ```
-cat output/lyca.raw.vcf | perl ../scripts/SNPcleaner.pl -v -a 0 -k 10 -u 2 -d 1 -S 0 -s 0 -G output/lyca.mpileup -M NN_NN -o output/lyca.filt.vcf
+cat output/lyca.raw.vcf | perl scripts/SNPcleaner.pl -v -a 0 -k 10 -u 2 -d 1 -S 0 -s 0 -G output/lyca.mpileup -M NN_NN -o output/lyca.filt.vcf 2> /dev/null
 # it should print how many sites were processed and the individual mean depths
 ```
 
