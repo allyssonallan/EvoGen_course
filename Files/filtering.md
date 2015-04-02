@@ -421,15 +421,15 @@ It represents bases information at each position (on rows).
 Rows are defined as:
 
 nr | value
--- | -----
-1 | chromsome <br>
-2 | position <br>
-3 | reference base <br>
-4 | total sequencing depth <br>
-5 | read bases (compared to the reference) <br>
-6 | base qualities <br>
-7 | mapping qualities <br>
-.  | (after the ^ character for the end read) <br>
+---- | -----
+1 | chromsome
+2 | position
+3 | reference base
+4 | total sequencing depth
+5 | read bases (compared to the reference)
+6 | base qualities
+7 | mapping qualities
+.  | (after the ^ character for the end read)
 
 Columns 4-5-6 are repeated for each individual.
 
@@ -503,28 +503,28 @@ Our aim here is also to illustrate how filtering indeed changes the data and how
 
 Main quality control filters can be grouped as:
 
-1. Depth
-* Minimum site read depth <br>
-* Maximum site read depth <br>
-* Even depth across individuals <br>
-* Minimum number of alternate alleles <br>
+* Depth
+	+ Minimum site read depth <br>
+	+ Maximum site read depth <br>
+	+ Even depth across individuals <br>
+	+ Minimum number of alternate alleles <br>
 
-2. Bias and other quality aspects
-* Minimum RMS mapping quality for SNPs <br>
-* Mapping quality bias <br>
-* Strand bias <br>
-* Allele bias in potential heterozygotes <br>
-* Base quality bias <br>
-* Distance from end of read bias <br>
+* Bias and other quality aspects
+	+ Minimum RMS mapping quality for SNPs <br>
+	+ Mapping quality bias <br>
+	+ Strand bias <br>
+	+ Allele bias in potential heterozygotes <br>
+	+ Base quality bias <br>
+	+ Distance from end of read bias <br>
 
-3. Hardy-Weinberg Equilibrium
-* Exact test of HWE <br>
-* Excess of heterozygotes <br>
-* Excess of homozygotes <br>
+* Hardy-Weinberg Equilibrium
+	+ Exact test of HWE <br>
+	+ Excess of heterozygotes <br>
+	+ Excess of homozygotes <br>
 
-4. Biallelic site filter
+* Biallelic site filter
 
-5. Mutation type removal filters
+* Mutation type removal filters
 
 
 Read depth cutoffs can be chosen by first investigating the empirical distribution.
@@ -650,7 +650,7 @@ What other tests should we perform to filter sites? For instance, the global dep
 
 **ANSWER**:
 We may want to force that at least k individuals have at least n reads per-site. To achieve this, we must have included the per-sample depth in our VCF file (when running SAMtools).
-# Scripts that do this filtering are available (for instance) [here](https://github.com/fgvieira/ngsClean) and [here](http://popgen.dk/angsd/index.php/Filters).
+Scripts that do this filtering are available (for instance) [here](https://github.com/fgvieira/ngsClean) and [here](http://popgen.dk/angsd/index.php/Filters).
 
 **QUESTION**:
 This data has very low per-sample depth, and therefore we had to filter out many sites to have reliable calls. In the following examples we will see how we can effectively process such low-quality data for population genetic purposes.
