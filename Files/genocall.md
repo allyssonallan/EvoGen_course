@@ -11,40 +11,89 @@ We will use ANGSD (and SAMtools as additional material), and compare results usi
 As a preliminary step (if not already provided) we need to create a text file with a list of BAM files, and created indexes for such BAM files.
 You should have already run this, but in case here is the command line:
 ```
+zcat input/human/hg19_chr1.fa.gz > input/human/hg19_chr1.fa
 ls input/human/*bam > input/human/bams.list
-for i in input/human/smallNA*.bam; do samtools-0.1.19/samtools index $i; done
-./samtools-0.1.19/samtools faidx input/human/hg19_chr1.fa.gz
+for i in input/human/smallNA*.bam; do samtools-1.2/samtools index $i; done
+samtools-1.2/samtools faidx input/human/hg19_chr1.fa
 ```
 
 ### ANGSD
 
-First, we will see how to use ANGSD to call genotypes.
+[ANGSD](http://popgen.dk/angsd/index.php/Main_Page#Overview) is a software for analyzing next generation sequencing data. The software can handle a number of different input types from mapped reads to imputed genotype probabilities. Most methods take genotype uncertainty into account instead of basing the analysis on called genotypes.
+ANGSD is not part of ngsTools, but the latter automaticlaly links to the latest version of ANGSD.
+
+First, let us see all things ANGSD can do:
+```
+ngsTools/angsd/angsd
+
+	-> angsd version: 0.615	 build(Apr  2 2015 09:56:30)
+	-> Please use the website "http://www.popgen.dk/angsd" as reference
+	-> Use -nThreads or -P for number of threads allocated to the program
+
+Overview of methods:
+	-GL		Estimate genotype likelihoods
+	-doCounts	Calculate various counts statistics
+	-doAsso		Perform association study
+	-doMaf		Estimate allele frequencies
+	-doError	Estimate the type specific error rates
+	-doAncError	Estimate the errorrate based on perfect fastas
+	-doHWE		Est inbreeding per site
+	-doGeno		Call genotypes
+	-doFasta	Generate a fasta for a BAM file
+	-doAbbababa	Perform an ABBA-BABA test
+	-sites		Analyse specific sites (can force major/minor)
+	-doSaf		Estimate the SFS and/or neutrality tests genotype calling
+	-doHetPlas	Estimate hetplasmy by calculating a pooled haploid frequency
+
+	Below are options that can be usefull
+	-bam		Options relating to bam reading
+	-doMajorMinor	Infer the major/minor using different approaches
+	-ref/-anc	Read reference or ancestral genome
+	many others
+
+For information of specific options type: 
+	./angsd METHODNAME eg 
+		./angsd -GL
+		./angsd -doMaf
+		./angsd -doAsso etc
+		./angsd sites for information about indexing -sites files
+Examples:
+	Estimate MAF for bam files in 'list'
+		'./angsd -bam list -GL 2 -doMaf 2 -out RES -doMajorMinor 1'
+```
+
+We now see how to use ANGSD to call genotypes.
 The specific option is `-doGeno`:
 ```
-./angsd/angsd -doGeno
+ngsTools/angsd/angsd -doGeno
 	...
 	-doGeno	0
 	1: write major and minor
 	2: write the called genotype encoded as -1,0,1,2, -1=not called otherwise counts of derived
 	4: write the called genotype directly: eg AA,AC etc 
 	8: write the posterior probability of all possible genotypes
-	16: write the posterior probability of called gentype
-	32: write the posterior probability of called gentype as binary
+	16: write the posterior probability of called genotype
+	32: write the posterior probability of called genotype as binary
+	-> A combination of the above can be choosen by summing the values, EG write 0,1,2 types with majorminor as -doGeno 3
+	-postCutoff=0.333333 (Only genotype to missing if below this threshold)
+	-geno_minDepth=-1	(-1 indicates no cutof)
+	-geno_maxDepth=-1	(-1 indicates no cutof)
 	...
 ```
+
 We also want to first perform a SNP calling so we assign genotypes only for putatively variable sites.
 We may also want to explore some basic filtering that can be done by ANGSD, as explained [here](http://popgen.dk/angsd/index.php/Filters).
 Briefly, these are the options for filtering we may want to use:
 
 Parameter | Meaning
 --------- | -------
--minInd 10 | use only sites with data from at least N individuals <br>
--setMinDepth 20 | minimum total depth <br>
--setMaxDepth 400 | minimum total depth <br>
+-minInd 10 | use only sites with data from at least N individuals
+-setMinDepth 20 | minimum total depth
+-setMaxDepth 400 | minimum total depth
 
 Other options can be see with:
 ```
-./angsd/angsd -bam
+ngsTools/angsd/angsd -bam
 ...
 -remove_bads	1	Discard 'bad' reads, (flag >=255) 
 -uniqueOnly	0	Discards reads that does not map uniquely
@@ -59,20 +108,20 @@ Other options can be see with:
 
 Therefore, our command can be:
 ```
-./angsd/angsd -bam input/human/bams.list -ref input/human/hg19_chr1.fa.gz -minInd 10 -setMinDepth 20 -remove_bads 1 -uniqueOnly 1 -minMapQ 10 -minQ 10 -trim 5 -only_proper_pairs 1 -C 50 -baq 1 -GL 1 -doMaf 2 -doMajorMinor 4 -SNP_pval 0.01  -r 1: -doGeno 2 -doCounts 1 -doPost 1 -out output/human
+ngsTools/angsd/angsd -bam input/human/bams.list -ref input/human/hg19_chr1.fa -minInd 10 -setMinDepth 20 -remove_bads 1 -uniqueOnly 1 -minMapQ 10 -minQ 10 -trim 5 -only_proper_pairs 1 -C 50 -baq 1 -GL 1 -doMaf 2 -doMajorMinor 4 -SNP_pval 0.01  -r 1: -doGeno 2 -doCounts 1 -doPost 1 -out output/human
 ```
 Here we used the reference allele as major, and analysing only the first chromosome (data is a subset anyway).
 
 Here, we also used another option, `doPost`:
 ```
-./angsd/angsd -doPost
+ngsTools/angsd/angsd -doPost
 	...
 	-doPost	0	(Calculate posterior prob ...)
 	1: Using frequency as prior
 	2: Using uniform prior
 	...
 ```
--doPost 1 uses the estimate per-site allele frequency as a prior for genotype proportions, assuming Hardy Weinberg Equilibrium. 
+`-doPost 1` uses the estimate per-site allele frequency as a prior for genotype proportions, assuming Hardy Weinberg Equilibrium. 
 We will see later what to do when the assumption of HWE is not valid.
 
 Let us look at the output files:
@@ -86,7 +135,7 @@ Genotypes are coded as 0,1,2, as the number of alternative alleles.
 
 If we want to print the major and minor allele then we set `-doGeno 3`:
 ```
-./angsd/angsd -bam input/human/bams.list -ref input/human/hg19_chr1.fa.gz -minInd 10 -setMinDepth 20 -remove_bads 1 -uniqueOnly 1 -minMapQ 10 -minQ 10 -trim 5 -only_proper_pairs 1 -C 50 -baq 1 -GL 1 -doMaf 2 -doMajorMinor 4 -SNP_pval 0.01  -r 1: -doGeno 2 -doCounts 1 -doPost 1 -out output/human
+ngsTools/angsd/angsd -bam input/human/bams.list -ref input/human/hg19_chr1.fa -minInd 10 -setMinDepth 20 -remove_bads 1 -uniqueOnly 1 -minMapQ 10 -minQ 10 -trim 5 -only_proper_pairs 1 -C 50 -baq 1 -GL 1 -doMaf 2 -doMajorMinor 4 -SNP_pval 0.01  -r 1: -doGeno 3 -doCounts 1 -doPost 1 -out output/human
 gunzip -c output/human.geno.gz | less -S
 ```
 
@@ -94,7 +143,7 @@ Values coded as -1 represent missing data. Indeed, genotypes with a posterior pr
 You can vary this cutoff by setting the option -postCutoff.
 For instance, if we set `-postCutoff 0`:
 ```
-./angsd/angsd -bam input/human/bams.list -ref input/human/hg19_chr1.fa.gz -minInd 10 -setMinDepth 20 -remove_bads 1 -uniqueOnly 1 -minMapQ 10 -minQ 10 -trim 5 -only_proper_pairs 1 -C 50 -baq 1 -GL 1 -doMaf 2 -doMajorMinor 4 -SNP_pval 0.01 -r 1: -doGeno 2 -doPost 2 -out output/human -postCutoff 0
+ngsTools/angsd/angsd -bam input/human/bams.list -ref input/human/hg19_chr1.fa -minInd 10 -setMinDepth 20 -remove_bads 1 -uniqueOnly 1 -minMapQ 10 -minQ 10 -trim 5 -only_proper_pairs 1 -C 50 -baq 1 -GL 1 -doMaf 2 -doMajorMinor 4 -SNP_pval 0.01 -r 1: -doGeno 2 -doPost 2 -out output/human -postCutoff 0
 ```
 we get
 ```
@@ -103,7 +152,7 @@ gunzip -c output/human.geno.gz | grep -1 - | wc -l
 ```
 sites with missing genotypes, while if we are more stringent and use 0.95 as cutoff
 ```
-./angsd/angsd -bam input/human/bams.list -ref input/human/hg19_chr1.fa.gz -minInd 10 -setMinDepth 20 -remove_bads 1 -uniqueOnly 1 -minMapQ 10 -minQ 10 -trim 5 -only_proper_pairs 1 -C 50 -baq 1 -GL 1 -doMaf 2 -doMajorMinor 4 -SNP_pval 0.01 -r 1: -doGeno 2 -doPost 2 -out output/human -postCutoff 0.95
+ngsTools/angsd/angsd -bam input/human/bams.list -ref input/human/hg19_chr1.fa -minInd 10 -setMinDepth 20 -remove_bads 1 -uniqueOnly 1 -minMapQ 10 -minQ 10 -trim 5 -only_proper_pairs 1 -C 50 -baq 1 -GL 1 -doMaf 2 -doMajorMinor 4 -SNP_pval 0.01 -r 1: -doGeno 2 -doPost 2 -out output/human -postCutoff 0.95
 ```
 we get
 ```
@@ -112,9 +161,9 @@ gunzip -c output/human.geno.gz | grep -1 - | wc -l
 sites with at least one individual with missing genotype (all!).
 Why is that?
 
-Let us look at the depth distribution for this dataset:
+Let us look at the depth distribution for this dataset, by using `-doCounts 1 -doDepth 1`:
 ```
-./angsd/angsd -bam input/human/bams.list -ref input/human/hg19_chr1.fa.gz -minInd 10 -setMinDepth 20 -remove_bads 1 -uniqueOnly 1 -minMapQ 10 -minQ 10 -trim 5 -only_proper_pairs 1 -C 50 -baq 1 -doCounts 1 -doDepth 1 -maxDepth 1000 -r 1: -out output/human
+ngsTools/angsd/angsd -bam input/human/bams.list -ref input/human/hg19_chr1.fa -minInd 10 -setMinDepth 20 -remove_bads 1 -uniqueOnly 1 -minMapQ 10 -minQ 10 -trim 5 -only_proper_pairs 1 -C 50 -baq 1 -doCounts 1 -doDepth 1 -maxDepth 1000 -r 1: -out output/human
 # script to plot distribution of depth
 Rscript scripts/plotDepthANGSD.R output/human.depthGlobal output/human.depthSample output/human.depth.pdf
 open output/human.depth.pdf # on mac
@@ -130,13 +179,13 @@ We will show later how to accurately estimate summary statistics with low-depth 
 
 **ADDITIONAL MATERIAL**
 For some studies (domesticated or self-pollinated species), it is important to consider any deviation from HWE when performing genotype or SNP calling.
-We provide some command lines ([here](https://github.com/mfumagalli/EvoGen_course/blob/master/inbreeding.md)) to achieve this using ngsTools.
+We provide some command lines ([here](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/inbreeding.md)) to achieve this using ngsTools.
 
 
 ### SAMtools
 
 **ADDITIONAL MATERIAL**
-We also provide command lines ([here](https://github.com/mfumagalli/EvoGen_course/blob/master/genocall_samtools.md)) to call genotypes using SAMtools, and to compare results with ANGSD.
+We also provide command lines ([here](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/genocall_samtools.md)) to call genotypes using SAMtools, and to compare results with ANGSD.
 
 
 ### BEAGLE

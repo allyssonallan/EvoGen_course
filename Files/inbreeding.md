@@ -1,4 +1,7 @@
 
+Please note that all command lines below may not work with more recent versions of ANGSD, but are provided as a general reference.
+For more information on how to call genotypes in case of inbred species please refer to [ngsF](https://github.com/fgvieira/ngsF) web page.
+
 ### Inbreeding
 
 When studying domesticated or self-pollinated species it is extremely important to estimate inbreeding coefficients and include such estimates into genotype and SNP calling.
@@ -13,14 +16,14 @@ ngsTools is useful when simulating multiple populations with a specified degree 
 First, let us simulate 10 individuals with a mean per-sample inbreeding coefficient of 0.5.
 We simulated 1000 sites variable (in the population, not in the sample), with 6X as mean coverage
 ```
-./ngsTools/ngsSim/ngsSim -npop 1 -nsites 1000 -pvar 1 -depth 6 -errate 0.01 -F 0.5 -seed 1 -outfiles output/simul
+ngsTools/ngsSim/ngsSim -npop 1 -nsites 1000 -pvar 1 -depth 6 -errate 0.01 -F 0.5 -seed 1 -outfiles output/simul
 ```
 
 There are a lot of files in output. For a complete description read [here](https://github.com/mfumagalli/ngsSim/tree/master/examples).
 We are interested in the `.glf.gz` files which are the per-site per-sample genotype likelihoods.
 We first need to convert these values into an accetable format for ngsF (the program in ngsTools dedicated to the calculation of inbreeding coefficients).
 ```
-./angsd/angsd -sim1 output/simul.glf.gz -nInd 10 -doGlf 3 -doMaf 2 -SNP_pval 0.001 -out output/simul.geno -doMajorMinor 1
+ngsTools/angsd/angsd -sim1 output/simul.glf.gz -nInd 10 -doGlf 3 -doMaf 2 -SNP_pval 0.001 -out output/simul.geno -doMajorMinor 1
 ```
 
 Now we can estimate inbreeding coefficients (fast way)
@@ -36,7 +39,7 @@ cp input/simul.indF* output/.
 
 We can finally incorporate these estimate inbreeding coefficients in our calculation of allele frequencies, genotypes and summary statistics.
 ```
-./angsd/angsd -sim1 output/simul.glf.gz -nInd 10 -doGeno 3 -doPost 1 -doMaf 2 -out output/simul.indF -doMajorMinor 1 -indF output/simul.indF
+ngsTools/angsd/angsd -sim1 output/simul.glf.gz -nInd 10 -doGeno 3 -doPost 1 -doMaf 2 -out output/simul.indF -doMajorMinor 1 -indF output/simul.indF
 gunzip -c output/simul.mafs.gz | head
 ```
 

@@ -1,12 +1,16 @@
 
-We now use SAMtools to call genotypes on the same dataset.
+The following commands may not be fully compatible with more recent versions of SAMtools and therefore should be considered as pure indication.
+
+## SAMtools
+
+We now use SAMtools to call genotypes on the human dataset.
 Firstly, we generate a VCF file.
 ```
-./samtools-0.1.19/samtools mpileup -f input/human/hg19_chr1.fa.gz -b input/human/bams.list -g -r 1: -I | ./samtools-0.1.19/bcftools/bcftools view -cg -v - > output/human.vcf
+samtools-1.2/samtools mpileup -f input/human/hg19_chr1.fa -b input/human/bams.list -u -r 1: | bcftools-1.2/bcftools view - > output/human.vcf
 ```
 We can use **vcftools** to extract genotypes
 ```
-./vcftools_0.1.11/bin/vcftools --vcf output/human.vcf --012 --out output/human.sam
+vcftools_0.1.12b/bin/vcftools --vcf output/human.vcf --012 --out output/human.sam
 ``
 Let us have a look at the output files
 ```

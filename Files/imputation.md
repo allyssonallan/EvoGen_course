@@ -1,4 +1,6 @@
 
+The commands below are an illustration of how to impute genotypes using BEAGLE. This script do not work with the current files.
+
 Here we will briefly show how to impute data from genotype likelihoods using **BEAGLE** software.
 These commands are not supposed to be run on the example datasets.
 They are just to illustrate how imputation can be done (lines by T. Korneliussen).
@@ -9,7 +11,7 @@ Based on these sites we will output the genotype likelihoods based on the SAMtoo
 
 This is the command to generate such files:
 ```
-./angsd/angsd -bam bams.list -doSNP 1 -minLRT 6.6  -doMaf 2 -doMajorMinor 4 -r 1: -doGlf 2  -GL 1 -out angsd  -ref ref/hg19.fa.gz
+ngsTools/angsd/angsd -bam bams.list -doSNP 1 -minLRT 6.6  -doMaf 2 -doMajorMinor 4 -r 1: -doGlf 2  -GL 1 -out angsd  -ref ref/hg19.fa.gz
 ```
 You can look at the BEAGLE genotype likelihood format:
 ```
