@@ -17,8 +17,9 @@ Enter the folder and create a subfolder "Work" where you will be running the exe
 	cd Work
 	mkdir Results # you results will be saved here
 
-
 Instructions to download remaining input files and to obatin necessary programs for the practical sessions are given [here](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/install.md).
+
+Feel free to contact me (mfumagalli82@gmail.com) if you have problems.
 
 ## Agenda
 

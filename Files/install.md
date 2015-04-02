@@ -17,23 +17,35 @@ No knowledge of command line scripting is required.
 
 You need the following software to run most of these examples:
 
- - [SAMtools](http://samtools.sourceforge.net/) and [VCFtools](http://vcftools.sourceforge.net/)
+ - For days 1 and 2:
 
- - [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+ 	+ [SAMtools](http://samtools.sourceforge.net/), [bcftools](https://samtools.github.io/bcftools/bcftools.html) and [VCFtools](http://vcftools.sourceforge.net/)
 
- - [ANGSD](http://popgen.dk/wiki/index.php/ANGSD)
+ 	+ [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
 
- - [ngsTools](https://github.com/mfumagalli/ngsTools)
+ 	+ [Sickle](https://github.com/najoshi/sickle) and [Scythe](https://github.com/vsbuffalo/scythe)
 
- - [ngsDist](https://github.com/fgvieira/ngsDist)
+ 	+ [ANGSD](http://popgen.dk/wiki/index.php/ANGSD)
 
-To run some additional optional exercises you will also need [Picard](http://picard.sourceforge.net/), [Sickle](https://github.com/najoshi/sickle) and [Scythe](https://github.com/vsbuffalo/scythe).
+ 	+ [ngsTools](https://github.com/mfumagalli/ngsTools)
 
-For parsing and plotting you will also need [R](http://www.r-project.org/) and [Perl](http://www.perl.org/) installed.
+ - For day 3:
+
+	+ [ms](http://home.uchicago.edu/rhudson1/source.html)
+
+	+ [TreeMix](https://code.google.com/p/treemix/) [optional]
+
+ - For day 4:
+
+	+ [ngsDist](https://github.com/fgvieira/ngsDist) [optional]
+
+For parsing and plotting you will also need [R](http://www.r-project.org/) and 'Rscript' installed.
 You will also need some R packages to run all examples, and these are: 'ggplot2', 'VennDiagram', 'optparse', 'fields'.
+[Perl](http://www.perl.org/) and [Python](https://www.python.org/) may also be used.
 
 Please read individual documentation for proper installation of each software. As a general reference, we provide below instructions on how to download and install main programs used.
 
+Additional instructions to install optional programs can be found [here](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/install_additional.md) but it is very likely that you will not need these during this course, so feel free to ignore it. It is provided for the sake of completeness.
 
 ## Data
 
@@ -53,12 +65,12 @@ We will analysed only a subset of 20 samples.
 More information on this project can be found [here](http://www.1000genomes.org/).
 This dataset comprises 33 individuals of European descent.
 
- - Genotype likelihoods from inbred samples will be generated on-the-run.
+ - Genotype likelihoods from inbred samples (optional) will be generated on-the-run.
 
  - Genetic data for demographic and selection inferences are provided in the [Data](https://github.com/mfumagalli/EvoGen_course/tree/master/Data) folder.
 
 All these files can be downloaded [here](http://palin.popgen.dk/mfumagalli/Workshop/ANU/web/input.tar.gz).
-User is `student` and password is `ANU`.
+User is `student` and password is `ANU2014`.
 
 Untar these files by typing:
 ```
@@ -74,7 +86,7 @@ rm input_light.tar.gz
 mv input_light/ input/ # if you run this you will not be able to use human examples
 ```
 
-I added already generated output files, as a back up, [here](http://palin.popgen.dk/mfumagalli/Workshop/ANU/web/myoutput.tar.gz).
+As a backup, some pre-generated output files can be downloaded [here](https://www.dropbox.com/s/fw7ec89hy97pluq/myoutput.tar.gz?dl=0):
 ```
 tar -xvf myoutput.tar.gz
 rm myoutput.tar.gz
@@ -83,7 +95,7 @@ rm myoutput.tar.gz
 
 ## Preparation
 
-Assuming you are inside the `EvoGen_course/Work` folder previously created, you can create a folder where we will put all material (and results) for these 2 days.
+Assuming you are inside the `EvoGen_course/Work` folder previously created, you can create a folder where we will put all material (and results) for the first 2 days.
 ```
 mkdir bioinfo
 cd bioinfo
@@ -105,7 +117,7 @@ You may see a lot of warnings, but as long as they are not errors (and compilati
 
 To view a list of possible options, and check that everything worked for instance for ANGSD, simply type:
 ```
-./angsd/angsd
+ngsTools/angsd/angsd
 ```
 
 Then go back to your previous directory by typing `cd ..`.
@@ -171,17 +183,6 @@ cd ..
 
 You may want to install FastQC as well, available [here](http://www.bioinformatics.babraham.ac.uk/projects/fastqc).
 
-Optionally one could download some additional programs (mentioned below), as they will be cited in the course.
-
-- [Picard](http://picard.sourceforge.net)
-
-Download the latest zipped version [here](http://sourceforge.net/projects/picard/files) and unzip it.
-You need [Java](http://www.java.com/en/) to run Picard tool.
-
-For the solution of an exercise we will use [cutadapt](https://code.google.com/p/cutadapt/).
-You can use the git repository to install it from [here](https://github.com/marcelm/cutadapt).
-You need Python to run it.
-
 ------
 
 Lastly, we will also assume that you have perl (for parsing) and R (with Rscript, for plotting) installed in your /usr/bin directory.  Also, python may be used.
@@ -241,42 +242,5 @@ You will also need some scripts available [here](http://palin.popgen.dk/mfumagal
 tar -xvf scripts.tar.gz
 rm scripts.tar.gz
 ```
-
-To test that you have all required packages in Perl type:
-```
-perl scripts/SNPcleaner.pl --help
-```
-and see if it prints out something or errors.
-
-Optionally, you can download [GATK](http://www.broadinstitute.org/gatk/) and [FreeBayes](https://github.com/ekg/freebayes), as they will be briefly mentioned and discussed as supplementary information.
-
-### Misc
-
-In case no internet connection will be available, you can download some files we will generate [here](http://palin.popgen.dk/mfumagalli/Workshop/ANU/web/data.tar.gz).
-I will also include PDFs of some of the cited references.
-```
-tar -xvf data.tar.gz
-rm data.tar.gz
-```
-
-As a back up, you can find my output files [here](http://palin.popgen.dk/mfumagalli/Workshop/ANU/web/myoutput.tar.gz).
-```
-tar -xvf myoutput.tar.gz
-rm myoutput.tar.gz
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
