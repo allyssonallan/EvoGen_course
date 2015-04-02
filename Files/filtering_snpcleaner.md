@@ -263,3 +263,27 @@ ref_contig      55250   C       31      ............................... IGI7EIHH
 
 -------------
 
+-------------
+
+**WORKFLOW**:
+... > FILTERING SITES > CHECK
+
+Now we check the resulting Site Frequency Spectrum (SFS).
+We will see later how to accurately estimate it from sequencing reads.
+So far, we will quickly compute it from the resulting VCF file.
+
+```
+perl -ne 'print "$1\n" if /AF1=([^,;]+)/' output/lyca.filt.vcf > output/lyca.vcf.freqs
+Rscript scripts/plotSFS.R output/lyca.vcf.freqs output/lyca.vcf.sfs.pdf
+open output/lyca.vcf.sfs.pdf # on mac
+```
+You can also get it [here](http://palin.popgen.dk/mfumagalli/Workshop/ANU/web/lyca.vcf.afs.pdf).
+
+The output for this filtering step is a BED file (along with the filtered VCF file) with the positions that passed the quality filters.
+```
+head output/lyca.good.bed
+```
+This file can be used for all downstream analyses, along with the final VCF with only the valid sites.
+
+
+
