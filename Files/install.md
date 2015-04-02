@@ -185,6 +185,11 @@ You may want to install FastQC as well, available [here](http://www.bioinformati
 
 ------
 
+For days 3 and 4 you will need 'ms' and 'TreeMix'.
+Instructions to download them cna be found [here](http://home.uchicago.edu/rhudson1/source/mksamples.html) and [here](https://code.google.com/p/treemix/).
+
+------
+
 Lastly, we will also assume that you have perl (for parsing) and R (with Rscript, for plotting) installed in your /usr/bin directory.  Also, python may be used.
 To test if this is the case, type:
 ```
@@ -202,38 +207,6 @@ install.packages("optparse")
 You will be asked to select a mirror, and eventually to first install some missing dependencies. Close R by typing 'q()' and type 'n' if you are asked whether to save the current workspace.
 
 Also [awk](http://en.wikipedia.org/wiki/AWK) will be sometimes used to parse files, in some optional examples.
-
-Files will be un/compressed using gunzip, bzip2 and bunzip2, some details can be found [here](http://osxdaily.com/2012/05/29/create-extract-bz2-mac-os-x/) and [here](http://linux.about.com/library/cmd/blcmdl1_bunzip2.htm).
-
-For some optional exercises, a Perl script will use Statistics::Distributions package, available for download [here](http://search.cpan.org/~mikek/Statistics-Distributions-1.02/Distributions.pm). 
-The easiest way to install it is to run:
-```
-sudo cpan Statistics::Distributions
-```
-If it fails, download the .tar.gz file, then unzipped it and install it:
-```
-tar -xvzf Statistics-Distributions-1.02.tar.gz
-cd Statistics-Distributions-1.02
-perl Makefile.PL 
-make test
-cd..
-```
-You need to make sure that the package has been correctly added your Perl directory.
-
-Likewise you may need to install this additional package [IO-Compress](http://search.cpan.org/~pmqs/IO-Compress-2.064/lib/IO/Compress/Bzip2.pm):
-```
-sudo cpan IO::Compress::Bzip2
-# if it does not work try: sudo cpan force install IO::Compress::Bzip2
-```
-or manually:
-```
-tar -xvzf IO-Compress-2.064.tar.gz
-cd IO-Compress-2.064
-perl Makefile.PL
-cd ..
-```
-and Getopt which should be already installed, otherwise see [here](http://search.cpan.org/~jhi/perl-5.8.1/lib/Getopt/Std.pm).
-Before being worried that something failed, read below for a quick test to check that this perl script indeed works.
 
 ------------
 
