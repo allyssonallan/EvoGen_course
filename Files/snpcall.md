@@ -1,6 +1,6 @@
 
 **WORKFLOW**:
-FILTERED DATA -> SNP CALLING
+FILTERED DATA > SNP CALLING
 
 In this section, we will go through some examples on how to assign variable sites from BAM files, once the data has been filtered.
 We will show how to call SNPs with different methods, and we will compare their results.
@@ -17,41 +17,44 @@ As an illustration, we will use 20 BAM files of butterfiles with a file listing 
 
 Here we will use ANGSD to analyse our data. To see a full list of options type
 ```
-./angsd/angsd
+ngsTools/angsd/angsd
 ```
 and you should see something like
 ```
-        -> Please use the website "http://www.popgen.dk/angsd" as reference
-        -> Use -nThreads or -P for number of threads allocated to the program
+-> angsd version: 0.615	 build(Apr  2 2015 09:56:30)
+	-> Please use the website "http://www.popgen.dk/angsd" as reference
+	-> Use -nThreads or -P for number of threads allocated to the program
 
 Overview of methods:
-        -GL             Estimate genotype likelihoods
-        -doCounts       Calculate various counts statistics
-        -doAsso         Perform association study
-        -doMaf          Estimate allele frequencies
-        -doError        Estimate the type specific error rates
-        -doAncError     Estimate the errorrate based on perfect fastas
-        -doHWE          Estimate inbreeding per site
-        -doGeno         Call genotypes
-        -doFasta        Generate a fasta for a BAM file
-        -doAbbababa     Perform an ABBA-BABA test
-        -sites          Analyse specific sites (can force major/minor)
-        -doSaf          Estimate the SFS and/or neutrality tests genotype calling
+	-GL		Estimate genotype likelihoods
+	-doCounts	Calculate various counts statistics
+	-doAsso		Perform association study
+	-doMaf		Estimate allele frequencies
+	-doError	Estimate the type specific error rates
+	-doAncError	Estimate the errorrate based on perfect fastas
+	-doHWE		Est inbreedning per site
+	-doGeno		Call genotypes
+	-doFasta	Generate a fasta for a BAM file
+	-doAbbababa	Perform an ABBA-BABA test
+	-sites		Analyse specific sites (can force major/minor)
+	-doSaf		Estimate the SFS and/or neutrality tests genotype calling
+	-doHetPlas	Estimate hetplasmy by calculating a pooled haploid frequency
 
-        Below are options that can be usefull
-        -bam            Options relating to bam reading
-        -doMajorMinor   Infer the major/minor using different approaches
-        -ref/-anc       Read reference or ancestral genome
-        many others
+	Below are options that can be usefull
+	-bam		Options relating to bam reading
+	-doMajorMinor	Infer the major/minor using different approaches
+	-ref/-anc	Read reference or ancestral genome
+	many others
 
-For information of specific options type:
-        ./angsd METHODNAME eg
-                ./angsd -GL
-                ./angsd -doMaf
-                ./angsd -doAsso etc
+For information of specific options type: 
+	./angsd METHODNAME eg 
+		./angsd -GL
+		./angsd -doMaf
+		./angsd -doAsso etc
+		./angsd sites for information about indexing -sites files
 Examples:
-        Estimate MAF for bam files in 'list'
-                './angsd -bam list -GL 2 -doMaf 2 -out RES -doMajorMinor 1'
+	Estimate MAF for bam files in 'list'
+		'./angsd -bam list -GL 2 -doMaf 2 -out RES -doMajorMinor 1'
 ```
 
 ANGSD can also perform some basic filtering of the data, as described [here](http://www.popgen.dk/angsd/index.php/Filters). 
@@ -61,26 +64,36 @@ ANGSD can also be run with multiple threads.
 ------------
 
 Here we just quickly perform a data filtering for the whole dataset, using commands explained in the previous session.
-You do not need to run it, since we provide the final file in the `input/` folder.
+You do not need to do it, since we provide the final file in the `input/` folder.
 ```
-./samtools-0.1.19/samtools mpileup -AIDS -q 0 -Q 20 -C 50 -f input/lyca/referenceseq.fasta -b input/lyca/bams.list > output/lyca.all.mpileup
-./samtools-0.1.19/samtools mpileup -u -AIDS -q 0 -Q 20 -C 50 -f input/lyca/referenceseq.fasta -b input/lyca/bams.list | ./samtools-0.1.19/bcftools/bcftools view -gI - > output/lyca.all.raw.vcf 2> /dev/null
-OPTS='-a 0 -k 7 -u 1 -d 20 -D 400 -Q 30 -f 0.001 -S 1e-100 -s 0 -T 0.05 -b 0.05 -e 0.05 -h 0.05 -v'
-cat output/lyca.all.raw.vcf | perl ../scripts/SNPcleaner.pl $OPTS -B output/lyca.all.good.bed -G output/lyca.all.mpileup -P input/lyca/clst.txt -M NN_NN -o output/tmp
-# 746344 sites processed!
-rm output/tmp output/lyca.all.mpileup output/lyca.all.raw.vcf
-cut -f 1,3 output/lyca.all.good.bed > input/lyca/sites.bed
-cut -f 1,2 output/lyca.all.good.bed > input/lyca/sites.sam.bed
+wc -l input/lyca/sites.bed
+less -S input/lyca/sites.bed
 ```
-We need this last BED file with the list of sites to retain.
+We need this BED file with the list of sites to retain.
 You can find it in the input folder.
 
 As a first step we want to estimate **allele frequencies**:
+
 ```
-./angsd/angsd -b input/lyca/bams.list -GL 1 -doMajorMinor 1 -doMaf 2 -sites input/lyca/sites.bed -out output/lyca
+ngsTools/angsd/angsd -doMaf
+...
+-doMaf	0 (Calculate persite frequencies '.mafs.gz')
+	1: Frequency (fixed major and minor)
+	2: Frequency (fixed major unknown minor)
+	4: Frequency from genotype probabilities
+	8: AlleleCounts based method (known major minor)
+	NB. Filedumping is supressed if value is negative
+...
+```
+
+Therefore our command line could be:
+```
+ngsTools/angsd/angsd sites index input/lyca/sites.bed # to index file with sites to keep
+ngsTools/angsd/angsd -b input/lyca/bams.list -GL 1 -doMajorMinor 1 -doMaf 2 -sites input/lyca/sites.bed -out output/lyca
 ```
 Results are stored in the `output/` folder. 
-Which are the output files? <br>
+
+Which are the output files?
 ```
 output/lyca.arg
 output/lyca.mafs.gz
@@ -115,9 +128,10 @@ The first and second column indicate the position of each site, then we have maj
 
 To generate this file we used some options in ANGSD, `-GL 1 -doMajorMinor 1 -doMaf 2`. 
 What do they mean? 
+
 Let us check the online help:
 ```
-./angsd/angsd -GL
+ngsTools/angsd/angsd -GL
 	...	
 	-GL=0: 
 	1: SAMtools
@@ -126,20 +140,23 @@ Let us check the online help:
 	...
 ```
 This means that with `-GL` you can control how to compute genotype likelihoods, which method to use.
+
 ```
-./angsd/angsd -doMajorMinor
+ngsTools/angsd/angsd -doMajorMinor
 	...
 	-doMajorMinor	0
 	1: Infer major and minor from GL
 	2: Infer major and minor from allele counts
-	3: use major and minor from bim file (requires -filter afile.bim)
+	3: use major and minor from a file (requires -sites file.txt)
 	4: Use reference allele as major (requires -ref)
 	5: Use ancestral allele as major (requires -anc)
+	-skipTriallelic	0
 	...
 ```
 With -doMajorMinor you can set how to define the 2 allelic states.
+
 ```
-./angsd/angsd -doMaf
+ngsTools/angsd/angsd -doMaf
 	...
 	-doMaf	0 (Calculate persite frequencies '.mafs.gz')
 	1: Frequency (fixed major and minor)
@@ -164,14 +181,15 @@ There are several ways to call SNPs using ANGSD, for instance by using these opt
 ```
 Therefore we can consider assigning as SNPs sites whose estimated allele frequency is above a certain threhsold (e.g. the frequency of a singleton) or whose probability of being variable is above a specified value.
 
-As an illustration, let us call SNPs by computing: <br>
- - genotype likelihoods using GATK method; <br>
- - major and minor alleles from allele counts (you need to specify -doCounts 1); <br>
- - frequency from known major allele; <br>
- - SNPs as those having MAF>0.05. <br>
+As an illustration, let us call SNPs by computing:
+ - genotype likelihoods using GATK method;
+ - major and minor alleles from allele counts (you need to specify -doCounts 1);
+ - frequency from known major allele;
+ - SNPs as those having MAF>0.05.
+
 The command line is:
 ```
-./angsd/angsd -b input/lyca/bams.list -sites input/lyca/sites.bed -GL 2 -doMajorMinor 2 -doMaf 1 -minMaf 0.05 -doCounts 1 -out output/lyca
+ngsTools/angsd/angsd -b input/lyca/bams.list -sites input/lyca/sites.bed -GL 2 -doMajorMinor 2 -doMaf 1 -minMaf 0.05 -doCounts 1 -out output/lyca
 ```
 Please note that not all the combinations of parameters are possible, since they might be in conflict or require additional steps or flags.
 

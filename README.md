@@ -6,14 +6,19 @@ Evolutionary Genomics course - Data Analysis module
 
 ## Material
 
+To download all the material in this web page use [git](http://git-scm.com/):
+
 	git clone https://github.com/mfumagalli/EvoGen_course
+
+Enter the folder and create a subfolder "Work" where you will be running the exercises:
+
 	cd EvoGen_course
 	mkdir Work
 	cd Work
-	mkdir Results
+	mkdir Results # you results will be saved here
 
 
-Instructions to download all material necessary for the practical sessions are given [here](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/install.md).
+Instructions to download remaining input files and to obatin necessary programs for the practical sessions are given [here](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/install.md).
 
 ## Agenda
 

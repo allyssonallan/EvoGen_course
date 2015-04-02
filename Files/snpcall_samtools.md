@@ -1,4 +1,6 @@
 
+The commands provided below refer to a previous version of SAMtools and may not be functional with the most recent version.
+
 A commonly used program SAMtools, which outputs a file called VCF (Variant Call Format). 
 More information can be found [here](http://www.ncbi.nlm.nih.gov/pubmed/21653522) and [here](http://vcftools.sourceforge.net/specs.html).
 
