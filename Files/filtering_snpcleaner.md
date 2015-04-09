@@ -1,10 +1,10 @@
 
-
+The instructions below may not be fully operating using the latest version of SAMtools.
 
 **WORKFLOW**:
 ... > MAPPED READS > FILTERING SITES
 
-For instance, here we will use a custom Perl script, although there are many available tools for that.
+Here we will use a custom Perl script to filter sites, although there are many available tools for that.
 The scope here is to show the main steps for data filtering of sites, rather than giving a fixed pipeline.
 Our aim here is also to illustrate how filtering indeed changes the data and how important it is to keep track of such changes.
 

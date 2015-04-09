@@ -153,7 +153,7 @@ tar xzvf vcftools_0.1.12b.tar.gz
 rm vcftools_0.1.12b.tar.gz
 cd vcftools_0.1.12b
 make
-cd..
+cd ..
 ./vcftools_0.1.12b/bin/vcftools
 ```
 
@@ -214,6 +214,7 @@ You will also need some scripts available [here](http://palin.popgen.dk/mfumagal
 ```
 tar -xvf scripts.tar.gz
 rm scripts.tar.gz
+# make sure the scripts folder is inside bioinfo/ folder
 ```
 
 

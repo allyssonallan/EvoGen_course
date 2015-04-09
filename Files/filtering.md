@@ -184,7 +184,7 @@ We can check how many more reads we discard with a stricter filtering.
 
 Outputs are both single files and a combined file.
 
-Minimum quality should be set to 10 and at least 50 bases should be retain to obtain a reliable mapping.
+Minimum quality should be set to 10/20 and at least 50 bases should be retain to obtain a reliable mapping.
 
 
 ###EXERCISE
@@ -196,7 +196,7 @@ Note that trimming options are a tradeoff between increased accuracy and reads r
 In case of high-depth data it is reasonable to use a stringent threshold on quality.
 In case of low quality data, you may want to be more relaxed in order not to remove too much data (e.g. and thus having very short reads more difficult to align).
 
-As a further check of sanity, once you have called variants in your dataset, you can check their distribution along each read.
+As a further check, once you have called variants in your dataset, you can check their distribution along each read.
 If your trimming worked, this distribution should be even across each read.
 
 As a reference on various methods for read trimming see [this](http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0085024) paper.
@@ -232,6 +232,8 @@ We can use Picard to do this, after you have aligned your reads:
 ```
 although you can use your own scripts (and processing the raw reads directly) and other programs as well (e.g. SAMtools).
 
+Similarly, we can also remove regions of **low complexity** which may be hard to align correctly.
+
 Another important step you may want to consider is to remove reads from potential **contaminant** sources. 
 You can identify and remove reads that align to the human genome (if you are not analyzing human data...) or other contaminats (e.g. bacteria).
 Several scripts can be found for this purpose, for instance the ones provided by Sonal Singhal [here](https://sites.google.com/site/mvzseq/original-scripts-and-pipelines).
@@ -261,7 +263,7 @@ A program to estimate parameters of ancient DNA damage pattern is [MapDamage](ht
 There is a vast amount of programs for NGS data processing, most of them collected at [OmicTools](http://omictools.com/][OmicTools).
 For your reference, a comprehensive script that performs all above cited filtering steps can be found in the downloaded `scripts/` folder (named `scrubReads.pl`), kindly provided by Ke Bi at UC Berkeley.
 
-*** Reads alignment
+### Reads alignment
 
 **WORKFLOW**:
 ... FILTERED READS > ASSEMBLY
@@ -290,7 +292,7 @@ Each alignment has a quality score (MAPQ) associated, similar to a Phred score.
 These scores can be used for further filtering of low quality mapping of reads.
 
 
-*** Filtering sites and individuals
+### Filtering sites and individuals
 
 **WORKFLOW**:
 ... FILTERED READS > ASSEMBLY > MAPPED READS
@@ -375,7 +377,7 @@ There are many steps one can take in this regard.
 Here we will highlight some of them.
 
 We will use a combination of custom scripts and SAMtools for this purpose.
-Available tools include **[VCFtools](http://vcftools.sourceforge.net/docs.html)** and the `vcftools.pl` script included in [BCFtools](http://samtools.github.io/bcftools/). 
+Available tools include [VCFtools](http://vcftools.sourceforge.net/docs.html) and the `vcftools.pl` script included in [BCFtools](http://samtools.github.io/bcftools/). 
 
 **WORKFLOW**:
 ... > MAPPED READS > FILTERING SITES (mpileup)
@@ -487,7 +489,7 @@ tail -n 5000 output/lyca.raw.vcf | head -n 5
 You can see at each positions several metrics are reported, like the total depth (DP), mapping quality (MP), strand bias (SP), and so on.
 We can make full use of this file to filter our entries that do not meet our quality requirements.
 
-For instance, here we will use a custom Perl script, although there are many available tools for that.
+For instance, here we may use a custom Perl script, although there are many available tools for that.
 The scope here is to show the main steps for data filtering of sites, rather than giving a fixed pipeline.
 Our aim here is also to illustrate how filtering indeed changes the data and how important it is to keep track of such changes.
 
@@ -528,9 +530,6 @@ Again, we may want to remove sites with excessively high or low depth compared t
 
 Strand bias measures the imbalance for the number of reads at each strand. The end read bias test looks for unusually high/low number of alternate alleles at the of the reads, which could be due to bad trimming.
 Allele bias in potential heterozygotes tests for potential barcode/allele swapping.
-
-Let us see the options for this script (implemented by T. Linderoth and F.G. Vieira and others).
-This script reads a VCF file and filter SNPs based on a set of rules. 
 
 We can use SAMtools `varfilter.pl` script to perform some of the filters.
 This script reads a VCF file and filter SNPs based on a set of rules.
@@ -611,7 +610,8 @@ Parameter | Value | Description
 -d | 40  | minimum read depth
 -D | 1000 | maximum read depth
 ... | ... | ...
--p        print filtered variants
+-p | |  print filtered variants
+... | ... | ...
 
 Let us write down the command:
 ```
