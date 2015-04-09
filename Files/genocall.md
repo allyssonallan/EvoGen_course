@@ -11,7 +11,7 @@ We will use ANGSD (and SAMtools as additional material), and compare results usi
 As a preliminary step (if not already provided) we need to create a text file with a list of BAM files, and created indexes for such BAM files.
 You should have already run this, but in case here is the command line:
 ```
-# zcat input/human/hg19_chr1.fa.gz > input/human/hg19_chr1.fa
+gunzip -c input/human/hg19_chr1.fa.gz > input/human/hg19_chr1.fa
 ls input/human/*bam > input/human/bams.list
 for i in input/human/smallNA*.bam; do samtools-1.2/samtools index $i; done
 samtools-1.2/samtools faidx input/human/hg19_chr1.fa
@@ -192,7 +192,7 @@ We also provide command lines ([here](https://github.com/mfumagalli/EvoGen_cours
 
 **ADDITIONAL MATERIAL**
 You can also use BEAGLE to increase accuracy of your genotype calling.
-Several examples using BEAGLE to impute data are given [here](https://github.com/mfumagalli/EvoGen_course/blob/master/imputation.md).
+Several examples using BEAGLE to impute data are given [here](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/imputation.md).
 
 ### FreeBayes
 

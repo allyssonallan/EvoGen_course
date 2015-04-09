@@ -11,7 +11,7 @@ samtools-1.2/samtools mpileup -f input/human/hg19_chr1.fa -b input/human/bams.li
 We can use **vcftools** to extract genotypes
 ```
 vcftools_0.1.12b/bin/vcftools --vcf output/human.vcf --012 --out output/human.sam
-``
+```
 Let us have a look at the output files
 ```
 less -S output/human.sam.012
