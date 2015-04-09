@@ -117,7 +117,7 @@ fst[which.max(pbs[-which.max(pbs)]),]
 source("../Scripts/functions.R")
 
 # define the directory where you have installed "ms"
-ms_dir<-"/data/data/Software/msdir/ms"
+ms_dir<-"~/Documents/Software/msdir/ms"
 
 ms.command <- paste(ms_dir, "326 10000 -s 1 -I 3 118 120 88 -n 1 1.68 -n 2 1.12 -n 3 1.12 -eg 0 2 72 -eg 0 3 96 -ma x 2.42 1.52 2.42 x 7.73 1.52 7.73 x -ej 0.029 3 2 -en 0.029 2 0.29 -ej 0.19 2 1 -en 0.30 1 1 | gzip > Results/ms.txt.gz")
 
@@ -132,6 +132,7 @@ sim.chroms=readMs("Results/ms.txt.gz" , 326)$hap
 
 nreps=length(sim.chroms)
 
+# initialise
 sim.pbs<-rep(NA, nreps)
 for (i in 1:nreps) {
 
@@ -140,10 +141,13 @@ for (i in 1:nreps) {
         pops[[2]]=sim.chroms[[i]][119:238] # CEU
         pops[[3]]=sim.chroms[[i]][239:326] # CHB
 
+	# compute FST
         sim.fst=chroms2fst(pops)
 
+	# compute PBS
         sim.pbs[i]=( (-log(1-sim.fst[1])) + (-log(1-sim.fst[2])) - (-log(1-sim.fst[3])) ) / 2
 
+	# assign p-value
         if ((i %% 100)==0) cat(i, "\t", length(which(sim.pbs>=1.42))/i, "\n")
 
 }
