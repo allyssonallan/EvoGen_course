@@ -57,7 +57,7 @@ Feel free to contact me (mfumagalli82@gmail.com) if you have problems.
 	+	advanced methods to calculate summary statistics using:
 		-	[ANGSD](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/lowcov.md)
 		-	[ngsTools](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/lowcov_ngstools.md)
-		-	[ngsTools/ngsDist](https://github.com/mfumagalli/ngsTools/tree/master/Files/TUTORIAL.md)
+		-	[ngsTools/ngsDist](https://github.com/mfumagalli/ngsTools/tree/master/TUTORIAL.md)
 
 
 ### Day 3

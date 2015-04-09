@@ -72,6 +72,11 @@ less -S input/lyca/sites.bed
 We need this BED file with the list of sites to retain.
 You can find it in the input folder.
 
+Use only a portion of it.
+```
+head -n 100000 input/lyca/sites.bed > input/lyca/sites.angsd.bed
+```
+
 As a first step we want to estimate **allele frequencies**:
 
 ```
@@ -88,8 +93,8 @@ ngsTools/angsd/angsd -doMaf
 
 Therefore our command line could be:
 ```
-ngsTools/angsd/angsd sites index input/lyca/sites.bed # to index file with sites to keep
-ngsTools/angsd/angsd -b input/lyca/bams.list -GL 1 -doMajorMinor 1 -doMaf 2 -sites input/lyca/sites.bed -out output/lyca
+ngsTools/angsd/angsd sites index input/lyca/sites.angsd.bed # to index file with sites to keep
+ngsTools/angsd/angsd -b input/lyca/bams.list -GL 1 -doMajorMinor 1 -doMaf 2 -sites input/lyca/sites.angsd.bed -out output/lyca
 ```
 Results are stored in the `output/` folder. 
 
@@ -120,7 +125,7 @@ ref_contig	141	T	A	0.000000	20
 for a total of
 ```
 gunzip -c output/lyca.mafs.gz | tail -n+2 | wc -l
-   617828
+   99196
 ```
 sites.
 
@@ -189,7 +194,7 @@ As an illustration, let us call SNPs by computing:
 
 The command line is:
 ```
-ngsTools/angsd/angsd -b input/lyca/bams.list -sites input/lyca/sites.bed -GL 2 -doMajorMinor 2 -doMaf 1 -minMaf 0.05 -doCounts 1 -out output/lyca
+ngsTools/angsd/angsd -b input/lyca/bams.list -sites input/lyca/sites.angsd.bed -GL 2 -doMajorMinor 2 -doMaf 1 -minMaf 0.05 -doCounts 1 -out output/lyca
 ```
 Please note that not all the combinations of parameters are possible, since they might be in conflict or require additional steps or flags.
 
@@ -217,10 +222,10 @@ However, various cutoffs and a dedicated filtering should be perform to assess r
 Estimate allele frequencies and call SNPs using the example dataset (or your own) using ANGSD.
 Try varying the cutoff for SNP calling and record how many sites are predicted to be variable for each scenario.
 Identify which sites are not predicted to be variable anymore with a more stringent cutoff (e.g. between a pair of scenario), and plot their allele frequencies.
-A possible **SOLUTION** for this exercise is given [here](https://github.com/mfumagalli/EvoGen_course/blob/master/solutions.txt).
+A possible **SOLUTION** for this exercise is given [here](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/solutions.txt).
 
 **ADDITIONAL MATERIAL**
-Command lines for SNP calling using SAMtools, and comparison with ANGSD, are given [here](https://github.com/mfumagalli/EvoGen_course/blob/master/snpcall_samtools.txt).
+Command lines for SNP calling using SAMtools, and comparison with ANGSD, are given [here](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/snpcall_samtools.txt).
 
 
 

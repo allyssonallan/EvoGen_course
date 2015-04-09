@@ -6,14 +6,14 @@ Another important aspect of data analysis for population genetics is the estimat
 
 We use ANGSD to estimate SFS using on example dataset, using the methods described [here](http://www.ncbi.nlm.nih.gov/pubmed/22911679).
 Details on the implementation can be found [here](http://popgen.dk/angsd/index.php/SFS_Estimation).
-Briefly, from sequencing data one computes genotype likelihoods (as described above). 
+Briefly, from sequencing data one computes genotype likelihoods (as previously described). 
 From these quantities ANGSD computes posterior probabilities of Sample Allele Frequency (SAF), for each site. Finally, an estimate of the SFS is computed.
 
 Sequence data -> Genotype likelihoods -> Posterior probabilities of SAF -> SFS
 
-These steps can be accomplished in ANGSD using `-doSaf 1` option and the program `emOptim2`, as following:
+These steps can be accomplished in ANGSD using `-doSaf 1` option and the program `realSFS`, as following:
 ```
-ngsTools/angsd/angsd -b input/lyca/bams.list -anc input/lyca/referenceseq.fasta -sites input/lyca/sites.bed -minMapQ 10 -minQ 10 -GL 1 -doSaf 1 -out output/lyca
+ngsTools/angsd/angsd -b input/lyca/bams.list -anc input/lyca/referenceseq.fasta -sites input/lyca/sites.angsd.bed -minMapQ 10 -minQ 10 -GL 1 -doSaf 1 -out output/lyca
 ```
 What are the output files?
 ```
@@ -27,13 +27,13 @@ gunzip -c output/lyca.saf.pos.gz | head
 ```
 File .saf is a binary file, so we use a quick R script to have a look at its contents:
 ```
-Rscript scripts/printSAF.R output/lyca.saf 20 617215 0
+Rscript scripts/printSAF.R output/lyca.saf 20 99085 0
 ```
 
 What do these values represent?
 Let us convert them in proper probabilities.
 ```
-Rscript scripts/printSAF.R output/lyca.saf 20 617215 1
+Rscript scripts/printSAF.R output/lyca.saf 20 99085 1
 ```
 
 Now we can estimate the SFS:
@@ -74,10 +74,10 @@ Let us explore the different behaviour using different options.
 We can estimate the SFS using different genotype likelihoods or genotype priors.
 
 ```
-ngsTools/angsd/angsd -b input/lyca/bams.list -ref input/lyca/referenceseq.fasta -sites input/lyca/sites.bed -minMapQ 10 -minQ 10 -GL 1 -doMaf 2 -doMajorMinor 4 -SNP_pval 0.01 -doGeno 2 -doPost 1 -out output/lyca.angsd.v11
-ngsTools/angsd/angsd -b input/lyca/bams.list -ref input/lyca/referenceseq.fasta -sites input/lyca/sites.bed -minMapQ 10 -minQ 10 -GL 1 -doMaf 2 -doMajorMinor 4 -SNP_pval 0.01 -doGeno 2 -doPost 2 -out output/lyca.angsd.v12
-ngsTools/angsd/angsd -b input/lyca/bams.list -ref input/lyca/referenceseq.fasta -sites input/lyca/sites.bed -minMapQ 10 -minQ 10 -GL 2 -doMaf 2 -doMajorMinor 4 -SNP_pval 0.01 -doGeno 2 -doPost 1 -out output/lyca.angsd.v21
-ngsTools/angsd/angsd -b input/lyca/bams.list -ref input/lyca/referenceseq.fasta -sites input/lyca/sites.bed -minMapQ 10 -minQ 10 -GL 2 -doMaf 2 -doMajorMinor 4 -SNP_pval 0.01 -doGeno 2 -doPost 2 -out output/lyca.angsd.v22
+ngsTools/angsd/angsd -b input/lyca/bams.list -ref input/lyca/referenceseq.fasta -sites input/lyca/sites.angsd.bed -minMapQ 10 -minQ 10 -GL 1 -doMaf 2 -doMajorMinor 4 -SNP_pval 0.01 -doGeno 2 -doPost 1 -out output/lyca.angsd.v11
+ngsTools/angsd/angsd -b input/lyca/bams.list -ref input/lyca/referenceseq.fasta -sites input/lyca/sites.angsd.bed -minMapQ 10 -minQ 10 -GL 1 -doMaf 2 -doMajorMinor 4 -SNP_pval 0.01 -doGeno 2 -doPost 2 -out output/lyca.angsd.v12
+ngsTools/angsd/angsd -b input/lyca/bams.list -ref input/lyca/referenceseq.fasta -sites input/lyca/sites.angsd.bed -minMapQ 10 -minQ 10 -GL 2 -doMaf 2 -doMajorMinor 4 -SNP_pval 0.01 -doGeno 2 -doPost 1 -out output/lyca.angsd.v21
+ngsTools/angsd/angsd -b input/lyca/bams.list -ref input/lyca/referenceseq.fasta -sites input/lyca/sites.angsd.bed -minMapQ 10 -minQ 10 -GL 2 -doMaf 2 -doMajorMinor 4 -SNP_pval 0.01 -doGeno 2 -doPost 2 -out output/lyca.angsd.v22
 ```
 
 Let us plot the results using R. Open it and type
