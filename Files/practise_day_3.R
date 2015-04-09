@@ -1,7 +1,8 @@
 
 ## These commands are meant to be run in R
-## Make sure you have crated a folder called Results in the current directory (if not do that with "mkdir Results")
+## Make sure you have created a folder called Results in the current directory (if not do that with "mkdir Results")
 ## This script calls the program "ms", so be sure you have installed it
+## Make sure you are in the Work/ folder.
 
 # open R
 
@@ -14,7 +15,7 @@ source("../Scripts/functions.R")
 # if you want to see this file type "cat ../Data/polar.brown.sfs" in your terminal
 
 # read this file and store the the joint SFS of polar VS brown bears into a matrix
-polar.brown.sfs<-as.matrix(read.table("..//Data/polar.brown.sfs", stringsAsFactors=FALSE, header=FALSE))
+polar.brown.sfs<-as.matrix(read.table("../Data/polar.brown.sfs", stringsAsFactors=FALSE, header=FALSE))
 # this matrix represents the joint (2D) site frequency spectrum (SFS)
 
 # -----
@@ -25,8 +26,8 @@ polar.brown.sfs<-as.matrix(read.table("..//Data/polar.brown.sfs", stringsAsFacto
 polar.nr_ind<-(nrow(polar.brown.sfs)-1)/2
 brown.nr_ind<-(ncol(polar.brown.sfs)-1)/2
 # on the other hand the number of chromosomes can be retrieved as
-polar.nr_chrom=nrow(polar.brown.sfs)-1
-brown.nr_chrom=ncol(polar.brown.sfs)-1
+polar.nr_chrom<-nrow(polar.brown.sfs)-1
+brown.nr_chrom<-ncol(polar.brown.sfs)-1
 
 # -----
 
@@ -80,10 +81,10 @@ tdiv_max_coal <- tdiv_max/(gen_time*ref_pop_size*4)
 # initialise output files
 cat("", file="Results/divergence_distance.txt")
 
-debug=FALSE # set this to TRUE if you want to plot intermediate results
+debug<-FALSE # set this to TRUE if you want to plot intermediate results
 
 # set the directory wher you installed "ms" software
-ms_dir="/data/data/Software/msdir/ms" # this is my specific case, yours could be different
+ms_dir<-"~/Documents/Software/msdir/ms" # this is my specific case, yours could be different
 
 # iterate across all simulations
 for (i in 1:nr_simul) # run this "for loop" nr_simul times
@@ -229,7 +230,8 @@ plot2DSFS(matrix.dist, xlab="Polar", ylab="Brown", main="Eucledian distance")
 image(x=seq(0,polar.nr_chrom), y=seq(0,brown.nr_chrom), z=matrix.resid, xlab="Polar", ylab="Brown", main="Std. Residuals (SIM-OBS)/OBS")
 
 
-
+## CREDITS
+# Few lines has been written by S.D. Gopal.
 
 
 

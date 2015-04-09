@@ -119,7 +119,7 @@ Do you get similar or different estimates of SFS?
 **EXERCISE**
 Compute the SFS on the same dataset after calling SNPs and genotypes, using either ANGSD or SAMtools, by using different thresolds for SNP calling.
 Compare the results.
-A possible **SOLUTION** for this exercise can be found [here](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/solutions.md).
+A possible **SOLUTION** for this exercise can be found [here](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/solutions.txt).
 Alternatively, estimate the SFS on your dataset or on the example human dataset.
 
 

@@ -1,5 +1,5 @@
 
-## This script shows an example of how to detecting natural positive selection in SNP data
+## This script shows an example of how to detect natural positive selection in SNP data
 
 # Data set is comprised of ~ 200,000 SNPs from the metaboChip in HapMap populations: YRI (Africa), CEU (Europe), CHB (East Asian)
 
@@ -24,7 +24,7 @@ Rscript ../Scripts/plink2fst.R
 # this generates a file Results/hapmap.fst
 # it may take a while so you can copy it from ../Data
 
-# copy ../Data/hapmap.fst Results/.
+# cp ../Data/hapmap.fst Results/.
 # less -S Results/hapmap.fst
 
 # -----

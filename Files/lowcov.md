@@ -68,7 +68,7 @@ cut -f 2,3,9 output/human.thetas.gz.pestPG
 Perform a sliding window analysis on the butterfly dataset, by computing Tajima D and Fu & Li metrics.
 Use the reference sequence to polarize alleles.
 Plot the results. 
-A possible **SOLUTION** for this exercise is given [here](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/solutions.md).
+A possible **SOLUTION** for this exercise is given [here](https://github.com/mfumagalli/EvoGen_course/tree/master/Files/solutions.txt).
 Alternatively, use your own data set.
 
 

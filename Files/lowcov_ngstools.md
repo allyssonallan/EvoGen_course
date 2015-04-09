@@ -9,18 +9,18 @@ Our first aim is to compute some measures of genetic differentiation, as describ
 We need to compute probabilities of allele frequencies for 2 populations we are considering now separately.
 We will consider 'sin' and 'vic' populations, with 7 and 6 individuals each.
 ```
-ngsTools/angsd/angsd -b input/lyca/bams_sin.list -anc input/lyca/referenceseq.fasta -GL 1 -doSaf 1 -out output/lyca.sin -sites input/lyca/sites.bed
-ngsTools/angsd/angsd -b input/lyca/bams_vic.list -anc input/lyca/referenceseq.fasta -GL 1 -doSaf 1 -out output/lyca.vic -sites input/lyca/sites.bed
+ngsTools/angsd/angsd -b input/lyca/bams_sin.list -anc input/lyca/referenceseq.fasta -GL 1 -doSaf 1 -out output/lyca.sin -sites input/lyca/sites.angsd.bed
+ngsTools/angsd/angsd -b input/lyca/bams_vic.list -anc input/lyca/referenceseq.fasta -GL 1 -doSaf 1 -out output/lyca.vic -sites input/lyca/sites.angsd.bed
 ```
 
 Let us check their number of sites:
 ```
 gunzip -c output/lyca.sin.saf.pos.gz | wc -l
-#  616793
+#  99001
 gunzip -c output/lyca.vic.saf.pos.gz | wc -l
-#  616317
+#  98907
 ```
-Of the original 744289 sites, some positions are skipped by the basic internal filtering done by ANGSD.
+Of the original 100,000 sites, some positions are skipped by the basic internal filtering done by ANGSD.
 Therefore, we first need to extract common sites in the two files, and recreate new .saf files.
 This can be done with these commands (from F.G. Vieira):
 ```
@@ -32,18 +32,18 @@ rm output/A.saf.pos output/B.saf.pos
 Now we have the indexes of common sites, indeed they have the same number of sites:
 ```
 wc -l output/A.pos 
-#  616044
+#  98862
 wc -l output/B.pos 
-#  616044
+#  98862
 ```
 
 Finally we create new .saf files with only sites in common:
 ```
-ngsTools/ngsUtils/GetSubSfs -infile output/lyca.sin.saf -posfile output/A.pos -nind 7 -nsites 616793 -len 616044 -outfile output/lyca.sin.fix.saf
-ngsTools/ngsUtils/GetSubSfs -infile output/lyca.vic.saf -posfile output/B.pos -nind 6 -nsites 616317 -len 616044 -outfile output/lyca.vic.fix.saf
+ngsTools/ngsUtils/GetSubSfs -infile output/lyca.sin.saf -posfile output/A.pos -nind 7 -nsites 99001 -len 98862 -outfile output/lyca.sin.fix.saf
+ngsTools/ngsUtils/GetSubSfs -infile output/lyca.vic.saf -posfile output/B.pos -nind 6 -nsites 98907 -len 98862 -outfile output/lyca.vic.fix.saf
 ```
 A quick trick to check that everything went fine is to retrieve the dimension of each file (using "ls -l"), then divide this number by 8 and then by the double of the number of individuals plus 1.
-You should get the final number of sites (e.g. `ls -l output/lyca.sin.fix.saf` gives 73925280 which is 73925280/8/15=616044).
+You should get the final number of sites (e.g. `ls -l output/lyca.sin.fix.saf` gives 11863440 which is 11863440/8/15=98862).
 
 -------------
 
@@ -51,7 +51,7 @@ Genotype likelihoods > Probabilities of Sample Allele Frequency > 2D-SFS
 
 Now we can estimate a 2D-SFS which will be used as prior in our calculation of genetic differentiation:
 ```
-ngsTools/ngsPopGen/ngs2dSFS -postfiles output/lyca.sin.fix.saf output/lyca.vic.fix.saf -outfile output/lyca.2dsfs -relative 1 -nind 7 6 -maxlike 1 -nsites 616044 -block_size 100000 -islog 1
+ngsTools/ngsPopGen/ngs2dSFS -postfiles output/lyca.sin.fix.saf output/lyca.vic.fix.saf -outfile output/lyca.2dsfs -relative 1 -nind 7 6 -maxlike 1 -nsites 98862 -block_size 50000 -islog 1
 cat output/lyca.2dsfs
 ```
 We can even plot it using R (you need ggplot2 installed)
@@ -68,7 +68,7 @@ A better way would be to use posterior probabilities and thus estimate the per-s
 
 Finally, we are able to estimate per-site FST:
 ```
-ngsTools/ngsPopGen/ngsFST -postfiles output/lyca.sin.fix.saf output/lyca.vic.fix.saf -priorfile output/lyca.2dsfs -outfile output/lyca.fst -nind 7 6 -nsites 616044 -block_size 100000 -islog 1
+ngsTools/ngsPopGen/ngsFST -postfiles output/lyca.sin.fix.saf output/lyca.vic.fix.saf -priorfile output/lyca.2dsfs -outfile output/lyca.fst -nind 7 6 -nsites 99862 -block_size 50000 -islog 1
 ```
 
 Look at the results:
@@ -98,13 +98,13 @@ ngsTools/angsd/misc/realSFS output/lyca.vic.fix.saf 12 -P 2 -nSites 1000000 2> /
 ngsTools/angsd/angsd -b input/lyca/bams_sin.list -anc input/lyca/referenceseq.fasta -GL 1 -doSaf 1 -pest output/lyca.sin.fix.sfs -out output/lyca.sin.pp
 ngsTools/angsd/angsd -b input/lyca/bams_vic.list -anc input/lyca/referenceseq.fasta -GL 1 -doSaf 1 -pest output/lyca.vic.fix.sfs -out output/lyca.vic.pp
 
-ngsTools/ngsUtils/GetSubSfs -infile output/lyca.sin.pp.saf -posfile output/A.pos -nind 7 -nsites 616793 -len 616044 -outfile output/lyca.sin.pp.fix.saf
-ngsTools/ngsUtils/GetSubSfs -infile output/lyca.vic.pp.saf -posfile output/B.pos -nind 6 -nsites 616317 -len 616044 -outfile output/lyca.vic.pp.fix.saf
+ngsTools/ngsUtils/GetSubSfs -infile output/lyca.sin.pp.saf -posfile output/A.pos -nind 7 -nsites 99001 -len 98862 -outfile output/lyca.sin.pp.fix.saf
+ngsTools/ngsUtils/GetSubSfs -infile output/lyca.vic.pp.saf -posfile output/B.pos -nind 6 -nsites 98907 -len 98862 -outfile output/lyca.vic.pp.fix.saf
 ```
 
 Then you can run the program and plot the results (in sliding windows of 10kbp)
 ```
-ngsTools/ngsPopGen/ngsStat -npop 2 -postfiles output/lyca.sin.pp.fix.saf output/lyca.vic.pp.fix.saf -nind 7 6 -nsites 616044 -iswin 1 -outfile output/lyca.stats -islog 1 -block_size 10000
+ngsTools/ngsPopGen/ngsStat -npop 2 -postfiles output/lyca.sin.pp.fix.saf output/lyca.vic.pp.fix.saf -nind 7 6 -nsites 98862 -iswin 1 -outfile output/lyca.stats -islog 1 -block_size 10000
 
 ## This is an example of output on windows of 10kbp
 # head -n 20 output/lyca.stats
@@ -126,17 +126,17 @@ ngsTools implements an estimation of the covariance matrix, as described [here](
 
 First, we need to compute genotype posterior probabilities, as previously explained.
 ```
-ngsTools/angsd/angsd -bam input/lyca/bams.list -ref input/lyca/referenceseq.fasta -GL 1 -doMaf 2 -doMajorMinor 1 -SNP_pval 0.05 -doGeno 32 -doPost 2 -out output/lyca -sites input/lyca/sites.bed
+ngsTools/angsd/angsd -bam input/lyca/bams.list -ref input/lyca/referenceseq.fasta -GL 1 -doMaf 2 -doMajorMinor 1 -SNP_pval 0.05 -doGeno 32 -doPost 2 -out output/lyca -sites input/lyca/sites.angsd.bed
 gunzip output/lyca.geno.gz
 gunzip -c output/lyca.mafs | wc -l
-#   10615 # -1 you get the nr of sites
+#   1514 # -1 you get the nr of sites
 ```
 Please note that here, in this scenario, we perform a (relaxed) SNP calling.
 
 Now we can estimate the covariance matrix, decompose it, and plot the first 2 components:
 ```
 # compute the covariance
-ngsTools/ngsPopGen/ngsCovar -probfile output/lyca.geno -outfile output/lyca.covar -nind 20 -nsites 10614 -call 0 -norm 0
+ngsTools/ngsPopGen/ngsCovar -probfile output/lyca.geno -outfile output/lyca.covar -nind 20 -nsites 1513 -call 0 -norm 0
 
 # prepare a suitable annotation file
 awk -v OFS="\t" '$1=$1' input/lyca/lyca.clst > input/lyca/lyca.clst2

@@ -4,11 +4,15 @@
 
 # Make sure you have a "Results" folder in your current directory and "treemix" installed
 
-TREEMIX=/data/data/Software/treemix-1.12
+# You should be in your Work/ folder.
+
+# Path to where TreeMix has been installed
+TREEMIX=~/Documents/Software/treemix-1.12
 
 # 1) Convert the data into readable file format
 
 gzip -c ../Data/hapmap.frq.strat > Results/hapmap.frq.strat.gz
+# download plink2treemix.py into treemix folder
 python $TREEMIX/plink2treemix.py Results/hapmap.frq.strat.gz Results/hapmap.frq.strat.treemix.gz
 
 # in case you do not have "gzip" or "python" copy the final file from ../Data
@@ -21,8 +25,8 @@ python $TREEMIX/plink2treemix.py Results/hapmap.frq.strat.gz Results/hapmap.frq.
 $TREEMIX/src/treemix -i Results/hapmap.frq.strat.treemix.gz -o Results/treemix.tree -root YRI -k 10 > Results/treemix.out
 tail -n 2 Results/treemix.out | head -n 1 > Results/treemix.nwk
 
-# quickly plot the tree
-seaview Results/treemix.nwk
+# quickly plot the tree using SeaView
+# ~/Documents/Software/seaview4/seaview.app/Contents/MacOS/seaview Results/treemix.nwk
 
 # plot the tree with residuals using the function plotTreemix.R [Treemix directory] [output file root]
 Rscript ../Scripts/plotTreemix.R $TREEMIX Results/treemix.tree

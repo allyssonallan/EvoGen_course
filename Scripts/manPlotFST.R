@@ -21,7 +21,7 @@ for (i in 8:10) {
 	#ths=c(ths, as.numeric(quantile(res[,i], seq(0.999,0.999,0.001), na.rm=T)))
 
 	plot(x=res$cpos, y=res[,i], col=cols, frame=F, xlab="", xaxt="n", ylab="FST", main=colnames(res)[i], ylim=c(0,1), pch=16)
-	abline(h=ths, lty=2)
+	#abline(h=ths, lty=2)
 
 }
 

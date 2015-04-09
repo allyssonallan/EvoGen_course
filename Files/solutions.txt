@@ -1,6 +1,8 @@
 
 Solutions for the proposed exercises are provided below.
 
+Please be aware that these commands are a pure indication and some modifications (e.g. path to software) are required to run them on the provided files.
+
 ** SNP calling
 
 Possible solution for SNP calling by varying the cutoff, using the butterfly dataset
