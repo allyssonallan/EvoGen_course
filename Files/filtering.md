@@ -13,10 +13,10 @@ Some basic quality control checks are essential to avoid that your biological co
 LAB WORK > SEQUENCING > LOW-LEVEL DATA (reads) > FILTERING READS
 
 First step is to filter our and/or trim reads in order to remove low quality data.
-Cleaning reads is an important step to decrease the likelihood that alignment and sequencing errors are mistaken as SNPs.
+Cleaning reads is an important step to decrease the chance that alignment and sequencing errors are mistaken as SNPs.
 
 There are several ways and tools one can use to achieve this goal.
-Here we will use some custom scripts (mostly borrowed from F.G. Vieira and T. Linderoth) and several external programs.
+Here we will use some custom scripts and several external programs.
 We will also use FastQC, available [here](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/).
 
 ------------
@@ -27,15 +27,14 @@ It is convenient to perform a QC analysis before and after your filtering proced
 **WORKFLOW**:
 LAB WORK > SEQUENCING > LOW-LEVEL DATA (reads) > FILTERING READS (FastQ)
 
-In a **FastQ** file quality scores are associated at each called base.
+In a **FastQ** file quality scores are associated to each called base.
 These scores are usually in -10log10(e) where e is the error rate.
 This is also called a *Phred quality score*.
 Therefore, a Q (quality score) of 10 implies an error every 10 bases, so base call accuracy of 90%; Q20 is an accuracy of 99% and Q30 of 99.9%.
 Thus, each base pair has a raw quality score associated.
 Calibrated quality scores (using known sequences for instance) are generally more accurate.
 
-Let`s have a look at an example:
-
+Let us have a look at an example:
 ```
    less input/chipmunk/IND01_R1.fq
    @HWI-ST745_0097:1:1101:1001:1000#0/1
@@ -71,12 +70,9 @@ With the program **FastQC**, we can quickly inspect:
 
 Statistic | Description
 --------- | -----------
-per base sequence quality | overview of the range of quality values across <br>
- | all bases at each position (quality usually degrades during the run, thus towards the end of the read);<br>
-per sequence quality scores | check whether a subset of sequences have <br>
- | global low quality scores;<br>
-per base sequence content | check whether there is difference in base compositions <br>
- | along the read (e.g. due to contamination or degradation);<br>
+per base sequence quality | overview of the range of quality values across all bases at each position (quality usually degrades during the run, thus towards the end of the read);<br>
+per sequence quality scores | check whether a subset of sequences have global low quality scores;<br>
+per base sequence content | check whether there is difference in base compositions along the read (e.g. due to contamination or degradation);<br>
 per base GC content | (see above);<br>
 per sequence GC content | the expectation should be a Normal distribution;<br>
 per base N content | check the amount of not-called bases;<br>
