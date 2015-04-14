@@ -13,6 +13,7 @@ Sequence data -> Genotype likelihoods -> Posterior probabilities of SAF -> SFS
 
 These steps can be accomplished in ANGSD using `-doSaf 1` option and the program `realSFS`, as following:
 ```
+samtools faidx input/lyca/referenceseq.fasta #Reindex the ancestral file
 ngsTools/angsd/angsd -b input/lyca/bams.list -anc input/lyca/referenceseq.fasta -sites input/lyca/sites.angsd.bed -minMapQ 10 -minQ 10 -GL 1 -doSaf 1 -out output/lyca
 ```
 What are the output files?
